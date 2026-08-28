@@ -26,12 +26,19 @@ def build_teaching_prompt() -> ChatPromptTemplate:
     )
 
 
-def create_chat_model(settings: Settings) -> BaseChatModel:
+def create_chat_model(
+    settings: Settings,
+    *,
+    timeout: float = 30.0,
+    max_retries: int = 3,
+) -> BaseChatModel:
     """Create the configured chat model using LangChain's provider abstraction."""
     return init_chat_model(
         model=settings.model_name,
         model_provider=settings.model_provider,
         temperature=0,
+        timeout=timeout,
+        max_retries=max_retries,
     )
 
 

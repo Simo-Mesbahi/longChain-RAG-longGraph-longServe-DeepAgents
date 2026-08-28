@@ -13,8 +13,8 @@
 
 - [x] Sorties structurees avec Pydantic
 - [x] Outils et appels de fonctions
-- [ ] Gestion des erreurs, retry et timeouts
-- [ ] Mini-projet d'extraction de demandes d'assurance
+- [x] Gestion des erreurs, retry et timeouts
+- [x] Mini-projet d'extraction de demandes d'assurance
 
 ## Version 0.3 - RAG
 

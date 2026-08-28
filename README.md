@@ -114,6 +114,15 @@ flowchart TD
 
 Le fil rouge sera un **assistant d'investigation documentaire en assurance**. Il devra rechercher des preuves dans des contrats et dossiers, produire une reponse citee, expliquer ses limites, demander une validation humaine lorsque necessaire et conserver une trace evaluable de son execution.
 
+## Projets pratiques
+
+| Projet | Competences | Statut |
+|---|---|:---:|
+| [Insurance Claim Intake](projects/01-insurance-claim-intake/README.md) | Pydantic, structured output, async, retries, timeouts | Disponible |
+| Assistant RAG documentaire | Retrieval, citations, evaluation | A venir |
+| Workflow d'investigation | LangGraph, state, human-in-the-loop | A venir |
+| Assistant d'investigation avance | LangSmith, Deep Agents, production | A venir |
+
 ## Documentation
 
 - [Installation detaillee](docs/getting-started.md)

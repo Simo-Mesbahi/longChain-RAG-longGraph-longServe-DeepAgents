@@ -161,6 +161,10 @@ python course/02-structured-output-and-tools/examples/tool_calling.py \
 
 Ces exemples utilisent le fournisseur configure dans `.env` et peuvent entrainer un cout API.
 
+## Mini-projet
+
+Le projet [Insurance Claim Intake](../../projects/01-insurance-claim-intake/README.md) assemble les notions du module dans un service asynchrone avec timeout, retries controles, backoff exponentiel et classification `accepted` ou `needs_review`.
+
 ## A retenir
 
 - Un prompt de formatage n'est pas un contrat.
@@ -175,3 +179,4 @@ Passez maintenant aux [exercices](exercises.md), puis au [quiz](quiz.md).
 - [LangChain - Structured output](https://docs.langchain.com/oss/python/langchain/structured-output)
 - [LangChain - Models and tool calling](https://docs.langchain.com/oss/python/langchain/models)
 - [LangChain - Tools](https://docs.langchain.com/oss/python/langchain/tools)
+- [LangChain Core - Runnable retry](https://reference.langchain.com/python/langchain-core/runnables/retry/RunnableRetry)
