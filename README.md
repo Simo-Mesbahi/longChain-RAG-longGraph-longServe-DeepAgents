@@ -30,7 +30,7 @@ A la fin du parcours, vous saurez :
 | 01 | LangChain : modeles, prompts et LCEL | Assistant pedagogique | Disponible |
 | 02 | Sorties structurees et outils | Extracteur type | Disponible |
 | 03 | Fondamentaux RAG | Questions-reponses avec sources | Disponible |
-| 04 | RAG avance et evaluation | RAG mesure et optimise | A venir |
+| 04 | RAG avance et evaluation | RAG mesure et optimise | Disponible |
 | 05 | LangGraph | Workflow stateful controle | A venir |
 | 06 | LangSmith | Traces et evaluations | A venir |
 | 07 | Deep Agents | Agent long avec sous-agents | A venir |
@@ -119,7 +119,7 @@ Le fil rouge sera un **assistant d'investigation documentaire en assurance**. Il
 | Projet | Competences | Statut |
 |---|---|:---:|
 | [Insurance Claim Intake](projects/01-insurance-claim-intake/README.md) | Pydantic, structured output, async, retries, timeouts | Disponible |
-| [Documentary RAG Assistant](projects/02-documentary-rag-assistant/README.md) | Chroma persistant, citations, evaluation | Disponible |
+| [Documentary RAG Assistant](projects/02-documentary-rag-assistant/README.md) | Chroma persistant, citations, evaluation retrieval/generation | Disponible |
 | Workflow d'investigation | LangGraph, state, human-in-the-loop | A venir |
 | Assistant d'investigation avance | LangSmith, Deep Agents, production | A venir |
 

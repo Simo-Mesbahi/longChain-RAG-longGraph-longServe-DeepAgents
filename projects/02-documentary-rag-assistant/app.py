@@ -23,12 +23,18 @@ from ai_course.documentary_rag import (
 )
 from ai_course.langchain_basics import create_chat_model
 from ai_course.rag_basics import HashingEmbeddings, build_answer_generator
+from ai_course.rag_evaluation import (
+    evaluate_generation,
+    load_generation_evaluation_dataset,
+    load_generation_predictions,
+)
 from ai_course.settings import load_settings
 
 PROJECT_DIR = Path(__file__).resolve().parent
 DEFAULT_CORPUS_DIR = PROJECT_DIR / "data"
 DEFAULT_INDEX_DIR = PROJECT_DIR / ".local" / "chroma"
 DEFAULT_EVALUATION_PATH = PROJECT_DIR / "evaluation" / "questions.jsonl"
+DEFAULT_PREDICTIONS_PATH = PROJECT_DIR / "evaluation" / "sample_predictions.jsonl"
 HASHING_MODEL = "hashing-sha256-256-v1"
 
 
@@ -70,6 +76,13 @@ def parse_args() -> argparse.Namespace:
     )
     evaluation_parser.add_argument("--dataset", type=Path, default=DEFAULT_EVALUATION_PATH)
     _add_retrieval_arguments(evaluation_parser)
+
+    generation_parser = subparsers.add_parser(
+        "evaluate-generation",
+        help="Evaluate saved answer predictions against references",
+    )
+    generation_parser.add_argument("--dataset", type=Path, default=DEFAULT_EVALUATION_PATH)
+    generation_parser.add_argument("--predictions", type=Path, default=DEFAULT_PREDICTIONS_PATH)
     return parser.parse_args()
 
 
@@ -178,6 +191,14 @@ def run_evaluation(args: argparse.Namespace) -> int:
     return 0
 
 
+def run_generation_evaluation(args: argparse.Namespace) -> int:
+    examples = load_generation_evaluation_dataset(args.dataset)
+    predictions = load_generation_predictions(args.predictions)
+    summary = evaluate_generation(examples, predictions)
+    print(summary.model_dump_json(indent=2))
+    return 0
+
+
 def main() -> int:
     args = parse_args()
     commands = {
@@ -185,6 +206,7 @@ def main() -> int:
         "search": run_search,
         "ask": run_ask,
         "evaluate": run_evaluation,
+        "evaluate-generation": run_generation_evaluation,
     }
     try:
         return commands[args.command](args)

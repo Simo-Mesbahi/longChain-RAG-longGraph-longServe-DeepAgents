@@ -5,6 +5,7 @@ preuves utiles et produire une reponse dont chaque citation est verifiee par l'a
 
 Ce mini-projet transforme les primitives du module 03 en un systeme reproductible : plusieurs
 documents, index vectoriel persistant, manifeste auditable, CLI et evaluation du retrieval.
+Le module 04 ajoute l'evaluation de generation sur predictions sauvegardees.
 
 > Toutes les regles, marques et donnees du corpus sont fictives. Le projet est pedagogique et
 > ne fournit aucune decision d'assurance ni conseil juridique.
@@ -21,6 +22,7 @@ documents, index vectoriel persistant, manifeste auditable, CLI et evaluation du
 - refus deterministe lorsqu'aucun contexte ne depasse le seuil ;
 - rejet des citations inventees ou absentes du retrieval ;
 - dataset JSONL et evaluation Hit Rate@k, Recall@k et MRR ;
+- predictions JSONL et evaluation answerability, citations et F1 lexical ;
 - embeddings locaux deterministes pour les tests et la demonstration gratuite.
 
 ## Architecture
@@ -54,6 +56,7 @@ La separation des composants permet de distinguer deux echecs souvent confondus 
 | `app.py search` | Inspection des chunks retrouves et de leurs scores |
 | `app.py ask` | Reponse LLM avec citations applicativement verifiees |
 | `app.py evaluate` | Mesures deterministes de la qualite du retrieval |
+| `app.py evaluate-generation` | Mesures deterministes de la qualite des reponses sauvegardees |
 | `.local/chroma/manifest.json` | Provenance, configuration et revision de l'index |
 
 Le dossier `.local/` est volontairement ignore par Git : un index est un artefact reconstruit
@@ -88,6 +91,8 @@ python projects/02-documentary-rag-assistant/app.py search \
 python projects/02-documentary-rag-assistant/app.py evaluate \
   --k 4 \
   --min-score 0.2
+
+python projects/02-documentary-rag-assistant/app.py evaluate-generation
 ```
 
 ## Utilisation avec OpenAI
@@ -142,6 +147,28 @@ les regressions analysables. Le taux de retrieval vide n'est pas une mesure de c
 retriever peut retourner un passage proche mais insuffisant. La decision de refuser appartient au
 pipeline de generation et doit etre evaluee separement.
 
+## Evaluation de la generation
+
+`evaluation/sample_predictions.jsonl` contient des reponses sauvegardees pour le dataset. Cette
+approche evite de relancer un modele a chaque comparaison et rend les experiences auditables.
+
+```bash
+python projects/02-documentary-rag-assistant/app.py evaluate-generation
+```
+
+Le rapport mesure :
+
+| Metrique | Question mesuree |
+|---|---|
+| Answerability accuracy | Le systeme repond-il seulement aux questions repondables ? |
+| Citation precision | Les sources citees sont-elles attendues ? |
+| Citation recall | Toutes les sources attendues sont-elles citees ? |
+| Lexical F1 | La reponse partage-t-elle les informations de la reference ? |
+| Error tags | Quels cas doivent etre analyses manuellement ? |
+
+Ces mesures sont deterministes et gratuites. Pour juger la fidelite fine aux preuves et les
+paraphrases, le module 04 montre aussi comment brancher un juge LLM structure.
+
 ## Choix d'architecture
 
 ### Pourquoi un manifeste ?
@@ -165,11 +192,10 @@ retrouves. Une source inventee provoque une erreur au lieu d'etre affichee comme
 - les embeddings de hashing sont lexicaux et non semantiques ;
 - le seuil doit etre calibre pour chaque modele et chaque corpus ;
 - Chroma local convient a un prototype, pas a toutes les contraintes distribuees ;
-- l'evaluation actuelle mesure le retrieval, pas encore la fidelite de la generation ;
+- le juge LLM reste optionnel et doit etre calibre sur des exemples humains ;
 - l'authentification, les droits documentaires et les donnees personnelles arrivent en production.
 
-L'evaluation de la correction, de la fidelite et de la completude de la reponse sera ajoutee au
-module 04. Les traces et datasets geres arriveront avec LangSmith au module 06.
+Les traces et datasets geres arriveront avec LangSmith au module 06.
 
 ## References officielles
 

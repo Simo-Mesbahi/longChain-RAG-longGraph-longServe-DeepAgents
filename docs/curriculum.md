@@ -22,7 +22,8 @@ Ingestion, parsing, chunking, embeddings, indexation, retrieval, generation et c
 
 ### Module 04 : RAG avance
 
-Recherche hybride, filtres, reranking, contextualisation, refus de repondre et evaluation separee du retrieval et de la generation.
+Predictions sauvegardees, evaluation separee du retrieval et de la generation, correction,
+fidelite, completude, refus de repondre, comparaison de configurations et juge LLM optionnel.
 
 ## Bloc 3 - Orchestration
 
@@ -57,4 +58,3 @@ Chaque bloc combine :
 - tests automatises ;
 - revue d'architecture ;
 - mini-projet documente.
-

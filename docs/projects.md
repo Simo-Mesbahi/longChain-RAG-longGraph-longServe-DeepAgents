@@ -17,9 +17,10 @@ Competences : structured output, validation, async, resilience et tests sans API
 
 Un corpus fictif d'assurance est charge, decoupe et stocke dans un index Chroma persistant. Le
 pipeline recherche les preuves, impose des citations valides et mesure separement la qualite du
-retrieval sur un dataset JSONL.
+retrieval et de la generation sur des artefacts JSONL.
 
-Competences : ingestion, embeddings, vector store, citations, refus, Hit Rate@k, Recall@k et MRR.
+Competences : ingestion, embeddings, vector store, citations, refus, Hit Rate@k, Recall@k, MRR,
+answerability, precision/recall des citations et juge LLM optionnel.
 
 [Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/02-documentary-rag-assistant)
 

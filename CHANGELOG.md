@@ -22,5 +22,9 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 - Index Chroma persistant, versionne et accompagne d'un manifeste auditable.
 - Dataset JSONL et evaluation Hit Rate@k, Recall@k et MRR.
 - Verification de la configuration d'embedding et detection des changements du corpus.
+- Module 04 sur le RAG avance, les predictions sauvegardees et l'evaluation de generation.
+- Metriques deterministes de generation : answerability, precision/recall des citations et F1 lexical.
+- Interface de juge LLM structure pour correction, fidelite et completude.
+- Commande `evaluate-generation` et predictions exemples pour le projet RAG documentaire.
 - Configuration Python, Ruff, Pytest et GitHub Actions.
 - Documentation de contribution, securite et feuille de route.

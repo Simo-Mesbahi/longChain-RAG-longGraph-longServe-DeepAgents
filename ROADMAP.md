@@ -22,7 +22,7 @@
 - [x] Embeddings et bases vectorielles
 - [x] Retrieval, citations et refus de repondre
 - [x] Evaluation du retrieval : Hit Rate@k, Recall@k et MRR
-- [ ] Evaluation de la generation : correction, fidelite et completude
+- [x] Evaluation de la generation : correction, fidelite et completude
 - [x] Projet RAG documentaire avec index persistant
 
 ## Version 0.4 - Agents controlables
