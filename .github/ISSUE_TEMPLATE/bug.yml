@@ -1,0 +1,33 @@
+name: Signaler une erreur
+description: Signaler un probleme dans le code ou le contenu pedagogique
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Merci de fournir un exemple reproductible sans inclure de cle API.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Que s'est-il passe et quel resultat attendiez-vous ?
+    validations:
+      required: true
+  - type: input
+    id: module
+    attributes:
+      label: Module ou fichier concerne
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Etapes de reproduction
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environnement
+      description: Systeme, version de Python et versions des paquets
+

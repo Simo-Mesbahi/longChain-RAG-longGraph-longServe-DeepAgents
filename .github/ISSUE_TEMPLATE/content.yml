@@ -1,0 +1,23 @@
+name: Proposer une amelioration du cours
+description: Suggere une explication, un exercice ou un projet
+title: "[Cours]: "
+labels: [documentation]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Sujet
+    validations:
+      required: true
+  - type: textarea
+    id: need
+    attributes:
+      label: Besoin pedagogique
+      description: Qu'est-ce qui est difficile a comprendre ou manque actuellement ?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposition
+

@@ -1,0 +1,23 @@
+site_name: De LangChain aux Deep Agents
+site_description: Cours open source en francais sur les applications LLM modernes
+repo_url: https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents
+repo_name: Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents
+theme:
+  name: material
+  language: fr
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+nav:
+  - Accueil: index.md
+  - Installation: getting-started.md
+  - Programme: curriculum.md
+  - Glossaire: glossary.md
+markdown_extensions:
+  - admonition
+  - attr_list
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.superfences
+
