@@ -10,6 +10,7 @@ from dotenv import load_dotenv
 class Settings:
     model_provider: str
     model_name: str
+    embedding_model: str
 
 
 def load_settings() -> Settings:
@@ -18,4 +19,5 @@ def load_settings() -> Settings:
     return Settings(
         model_provider=os.getenv("MODEL_PROVIDER", "openai"),
         model_name=os.getenv("MODEL_NAME", "gpt-4.1-mini"),
+        embedding_model=os.getenv("EMBEDDING_MODEL", "text-embedding-3-small"),
     )

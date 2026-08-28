@@ -29,7 +29,7 @@ A la fin du parcours, vous saurez :
 | 00 | Python, API et fondamentaux LLM | Premier appel fiable | Disponible |
 | 01 | LangChain : modeles, prompts et LCEL | Assistant pedagogique | Disponible |
 | 02 | Sorties structurees et outils | Extracteur type | Disponible |
-| 03 | Fondamentaux RAG | Questions-reponses avec sources | A venir |
+| 03 | Fondamentaux RAG | Questions-reponses avec sources | Disponible |
 | 04 | RAG avance et evaluation | RAG mesure et optimise | A venir |
 | 05 | LangGraph | Workflow stateful controle | A venir |
 | 06 | LangSmith | Traces et evaluations | A venir |

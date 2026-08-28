@@ -15,5 +15,8 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 - Tests des contraintes metier, schemas d'outils et autorisations d'execution.
 - Mini-projet Insurance Claim Intake avec service asynchrone et CLI.
 - Timeouts, retries selectifs, backoff exponentiel et statut de revue humaine.
+- Module 03 sur le RAG, le chunking, les embeddings et la recherche vectorielle.
+- Pipeline de reponse avec refus deterministe et validation stricte des citations.
+- Recherche locale reproductible avec embeddings pedagogiques sans cle API.
 - Configuration Python, Ruff, Pytest et GitHub Actions.
 - Documentation de contribution, securite et feuille de route.

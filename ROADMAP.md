@@ -18,9 +18,9 @@
 
 ## Version 0.3 - RAG
 
-- [ ] Chargement, nettoyage et decoupage des documents
-- [ ] Embeddings et bases vectorielles
-- [ ] Retrieval, citations et refus de repondre
+- [x] Chargement, nettoyage et decoupage des documents
+- [x] Embeddings et bases vectorielles
+- [x] Retrieval, citations et refus de repondre
 - [ ] Evaluation du retrieval et de la generation
 - [ ] Projet RAG documentaire
 
