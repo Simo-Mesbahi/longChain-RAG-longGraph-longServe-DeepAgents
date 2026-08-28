@@ -26,5 +26,7 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 - Metriques deterministes de generation : answerability, precision/recall des citations et F1 lexical.
 - Interface de juge LLM structure pour correction, fidelite et completude.
 - Commande `evaluate-generation` et predictions exemples pour le projet RAG documentaire.
+- Module 05 sur LangGraph : etat, noeuds, aretes, routage, checkpointers et interruptions.
+- Workflow d'investigation documentaire LangGraph avec revue humaine et audit trail.
 - Configuration Python, Ruff, Pytest et GitHub Actions.
 - Documentation de contribution, securite et feuille de route.

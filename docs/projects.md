@@ -24,8 +24,17 @@ answerability, precision/recall des citations et juge LLM optionnel.
 
 [Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/02-documentary-rag-assistant)
 
+## 03 - LangGraph Investigation Workflow
+
+Le corpus documentaire est orchestre par un graphe d'etat : analyse de la question, retrieval,
+verification des preuves, reponse citee, refus ou revue humaine.
+
+Competences : LangGraph, StateGraph, routing conditionnel, checkpointer, interruption,
+human-in-the-loop et audit trail.
+
+[Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/03-langgraph-investigation-workflow)
+
 ## Suite du fil rouge
 
-Les prochains projets reutiliseront ces composants dans un workflow LangGraph, ajouteront une
-validation humaine et des traces LangSmith, puis aboutiront a un assistant d'investigation
-documentaire deployable.
+Les prochains projets ajouteront des traces LangSmith, des datasets geres et des evaluations
+plus riches, puis aboutiront a un assistant d'investigation documentaire deployable.

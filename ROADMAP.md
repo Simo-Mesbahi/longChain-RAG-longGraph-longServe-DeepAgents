@@ -27,10 +27,10 @@
 
 ## Version 0.4 - Agents controlables
 
-- [ ] Etat, noeuds, aretes et routage LangGraph
-- [ ] Persistance et human-in-the-loop
+- [x] Etat, noeuds, aretes et routage LangGraph
+- [x] Persistance et human-in-the-loop
 - [ ] Traces, jeux de donnees et evaluations LangSmith
-- [ ] Agent d'investigation avec garde-fous
+- [x] Workflow d'investigation avec garde-fous
 
 ## Version 1.0 - Deep Agents
 

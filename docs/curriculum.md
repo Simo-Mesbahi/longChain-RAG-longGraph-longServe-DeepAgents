@@ -29,7 +29,8 @@ fidelite, completude, refus de repondre, comparaison de configurations et juge L
 
 ### Module 05 : LangGraph
 
-Etat, noeuds, aretes, conditions, boucles, persistence, streaming, interruption et validation humaine.
+Etat, noeuds, aretes, routage conditionnel, checkpointers, interruptions, reprise avec
+`Command(resume=...)` et validation humaine.
 
 ### Module 06 : LangSmith
 

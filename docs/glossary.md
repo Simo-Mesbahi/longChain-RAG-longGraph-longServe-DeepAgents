@@ -3,6 +3,10 @@
 **Agent**
 : Systeme qui choisit dynamiquement des actions pour atteindre un objectif.
 
+**Checkpointer**
+: Composant LangGraph qui sauvegarde l'etat d'un thread afin de reprendre, inspecter ou
+interrompre une execution.
+
 **Embedding**
 : Representation numerique d'un texte dans un espace vectoriel, utile pour mesurer une proximite semantique.
 
@@ -12,6 +16,17 @@
 **Juge LLM**
 : Modele utilise pour noter une sortie selon des criteres explicites. Il aide a evaluer des
 reponses ouvertes, mais doit etre calibre et surveille.
+
+**Human-in-the-loop**
+: Pattern dans lequel une execution automatisee demande une validation ou une correction humaine
+avant de continuer.
+
+**Interrupt**
+: Pause dynamique dans un graphe LangGraph. L'execution reprend ensuite avec `Command(resume=...)`.
+
+**LangGraph**
+: Runtime d'orchestration pour construire des workflows LLM stateful avec routage, persistence,
+streaming et validation humaine.
 
 **LCEL**
 : LangChain Expression Language, syntaxe de composition des composants LangChain avec l'operateur `|`.
