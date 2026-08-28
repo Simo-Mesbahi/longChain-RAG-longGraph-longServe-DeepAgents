@@ -10,4 +10,3 @@ def test_teaching_prompt_formats_expected_messages() -> None:
     assert "RAG" in value.messages[1].content
     assert "debutant" in value.messages[1].content
     assert "limites" in value.messages[0].content
-

@@ -19,4 +19,3 @@ def test_load_settings_reads_environment(monkeypatch) -> None:
 
     assert settings.model_provider == "anthropic"
     assert settings.model_name == "example-model"
-

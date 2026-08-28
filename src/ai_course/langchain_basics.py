@@ -38,4 +38,3 @@ def create_chat_model(settings: Settings) -> BaseChatModel:
 def build_teaching_chain(model: BaseChatModel) -> Runnable:
     """Compose the teaching prompt and chat model with LCEL."""
     return build_teaching_prompt() | model
-
