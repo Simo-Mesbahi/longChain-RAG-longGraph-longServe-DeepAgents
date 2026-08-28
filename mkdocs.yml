@@ -13,6 +13,7 @@ nav:
   - Accueil: index.md
   - Installation: getting-started.md
   - Programme: curriculum.md
+  - Projets: projects.md
   - Glossaire: glossary.md
 markdown_extensions:
   - admonition
@@ -20,4 +21,3 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.highlight
   - pymdownx.superfences
-

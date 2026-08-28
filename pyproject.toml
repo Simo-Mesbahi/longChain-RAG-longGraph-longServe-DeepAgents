@@ -25,6 +25,9 @@ dev = [
   "pytest-cov>=5.0,<7.0",
   "ruff>=0.11,<1.0",
 ]
+rag = [
+  "langchain-chroma>=1.1,<2.0",
+]
 docs = [
   "mkdocs-material>=9.6,<10.0",
 ]

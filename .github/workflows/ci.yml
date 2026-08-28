@@ -23,7 +23,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - name: Install project
-        run: python -m pip install -e ".[dev]"
+        run: python -m pip install -e ".[dev,rag]"
       - name: Lint
         run: ruff check .
       - name: Format
@@ -45,4 +45,3 @@ jobs:
         run: python -m pip install -e ".[docs]"
       - name: Build documentation
         run: mkdocs build --strict
-

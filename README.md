@@ -119,7 +119,7 @@ Le fil rouge sera un **assistant d'investigation documentaire en assurance**. Il
 | Projet | Competences | Statut |
 |---|---|:---:|
 | [Insurance Claim Intake](projects/01-insurance-claim-intake/README.md) | Pydantic, structured output, async, retries, timeouts | Disponible |
-| Assistant RAG documentaire | Retrieval, citations, evaluation | A venir |
+| [Documentary RAG Assistant](projects/02-documentary-rag-assistant/README.md) | Chroma persistant, citations, evaluation | Disponible |
 | Workflow d'investigation | LangGraph, state, human-in-the-loop | A venir |
 | Assistant d'investigation avance | LangSmith, Deep Agents, production | A venir |
 

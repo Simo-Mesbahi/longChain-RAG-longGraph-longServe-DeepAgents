@@ -21,8 +21,9 @@
 - [x] Chargement, nettoyage et decoupage des documents
 - [x] Embeddings et bases vectorielles
 - [x] Retrieval, citations et refus de repondre
-- [ ] Evaluation du retrieval et de la generation
-- [ ] Projet RAG documentaire
+- [x] Evaluation du retrieval : Hit Rate@k, Recall@k et MRR
+- [ ] Evaluation de la generation : correction, fidelite et completude
+- [x] Projet RAG documentaire avec index persistant
 
 ## Version 0.4 - Agents controlables
 

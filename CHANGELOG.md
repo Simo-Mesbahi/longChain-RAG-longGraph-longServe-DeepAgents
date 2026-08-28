@@ -18,5 +18,9 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 - Module 03 sur le RAG, le chunking, les embeddings et la recherche vectorielle.
 - Pipeline de reponse avec refus deterministe et validation stricte des citations.
 - Recherche locale reproductible avec embeddings pedagogiques sans cle API.
+- Assistant RAG documentaire avec corpus multi-sources et CLI complete.
+- Index Chroma persistant, versionne et accompagne d'un manifeste auditable.
+- Dataset JSONL et evaluation Hit Rate@k, Recall@k et MRR.
+- Verification de la configuration d'embedding et detection des changements du corpus.
 - Configuration Python, Ruff, Pytest et GitHub Actions.
 - Documentation de contribution, securite et feuille de route.
