@@ -11,8 +11,8 @@
 
 ## Version 0.2 - Sorties fiables
 
-- [ ] Sorties structurees avec Pydantic
-- [ ] Outils et appels de fonctions
+- [x] Sorties structurees avec Pydantic
+- [x] Outils et appels de fonctions
 - [ ] Gestion des erreurs, retry et timeouts
 - [ ] Mini-projet d'extraction de demandes d'assurance
 
@@ -38,4 +38,3 @@
 - [ ] Sandboxing et securite
 - [ ] Projet final documente et deployable
 - [ ] Guide de migration depuis LangServe
-
