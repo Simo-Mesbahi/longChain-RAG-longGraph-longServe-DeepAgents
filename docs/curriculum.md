@@ -41,7 +41,16 @@ online, monitoring et transformation des echecs en tests de regression.
 
 ### Module 07 : Deep Agents
 
-Planification, fichiers comme contexte, sous-agents, memoire, skills, sandboxing et taches longues.
+Deep Agents comme harness au-dessus de LangGraph, planification explicite, sous-agents,
+offloading du contexte dans des fichiers, permissions `allow`/`deny`/`interrupt`, backends,
+memoire long terme, skills, quality gate et observabilite LangSmith.
+
+Livrables :
+
+- cours complet `course/07-deep-agents` ;
+- exemples de planification, permissions et template SDK ;
+- projet `Deep Agent Investigation Analyst` sans cle API ;
+- tests de permissions, routage, memoire et contrats de publication.
 
 ### Module 08 : Production
 

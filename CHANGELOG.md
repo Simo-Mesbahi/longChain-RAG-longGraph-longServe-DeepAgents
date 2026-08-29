@@ -31,5 +31,8 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 - Module 06 sur LangSmith : traces, datasets, target functions, evaluateurs offline et online.
 - Helpers d'evaluation LangSmith-style avec traces locales, metriques de contrat et export SDK.
 - Projet LangSmith Quality Monitoring pour evaluer le workflow LangGraph sur un dataset versionne.
+- Module 07 sur Deep Agents : planification, sous-agents, fichiers, permissions, memoire et skills.
+- Helpers Deep Agents deterministes avec filesystem virtuel, quality gate et memoire long terme.
+- Projet Deep Agent Investigation Analyst pour transformer le workflow documentaire en agent long.
 - Configuration Python, Ruff, Pytest et GitHub Actions.
 - Documentation de contribution, securite et feuille de route.

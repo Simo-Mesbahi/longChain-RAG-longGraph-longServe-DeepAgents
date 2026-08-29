@@ -32,6 +32,9 @@ rag = [
 observability = [
   "langsmith>=0.4,<1.0",
 ]
+agents = [
+  "deepagents>=0.6.8,<1.0",
+]
 docs = [
   "mkdocs-material>=9.6,<10.0",
 ]

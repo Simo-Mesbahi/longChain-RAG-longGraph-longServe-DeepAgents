@@ -35,8 +35,8 @@
 
 ## Version 1.0 - Deep Agents
 
-- [ ] Planification et gestion du contexte
-- [ ] Sous-agents et memoire long terme
-- [ ] Sandboxing et securite
+- [x] Planification et gestion du contexte
+- [x] Sous-agents et memoire long terme
+- [x] Sandboxing et securite
 - [ ] Projet final documente et deployable
 - [ ] Guide de migration depuis LangServe

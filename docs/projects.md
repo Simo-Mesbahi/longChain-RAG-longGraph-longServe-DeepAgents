@@ -45,7 +45,19 @@ qualite, export LangSmith et tests de regression.
 
 [Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/04-langsmith-quality-monitoring)
 
+## 05 - Deep Agent Investigation Analyst
+
+Le workflow documentaire devient un agent long : planification, sous-agents specialises,
+fichiers intermediaires, permissions, memoire long terme et quality gate final. Le projet reste
+deterministe afin d'etre execute en CI sans cle API.
+
+Competences : Deep Agents, planning, context offloading, permissions, memoire, subagents,
+quality gate, audit trail et passage progressif vers le SDK officiel.
+
+[Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/05-deep-agent-investigation-analyst)
+
 ## Suite du fil rouge
 
-Les prochains projets ajouteront les Deep Agents, la memoire, les sous-agents et la preparation
-production, puis aboutiront a un assistant d'investigation documentaire deployable.
+Les prochains projets ajoutent la couche production, l'API, les controles d'exploitation et la
+migration depuis les anciens projets LangServe, puis aboutissent a un assistant d'investigation
+documentaire deployable.
