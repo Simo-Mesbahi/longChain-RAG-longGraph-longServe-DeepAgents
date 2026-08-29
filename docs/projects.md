@@ -56,8 +56,18 @@ quality gate, audit trail et passage progressif vers le SDK officiel.
 
 [Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/05-deep-agent-investigation-analyst)
 
+## 06 - Production Readiness and LangServe Migration
+
+Le systeme est prepare pour une exposition production : contrat API, healthchecks, readiness,
+secrets, rate limits, observabilite, rollback, Dockerfile, exemple Render et `langgraph.json`.
+Le projet formalise aussi une migration propre depuis LangServe.
+
+Competences : API contract, FastAPI, Docker, LangGraph deployment, LangSmith Deployment,
+securite, CI/CD, rollback, monitoring et migration de surfaces legacy.
+
+[Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/06-production-readiness-and-migration)
+
 ## Suite du fil rouge
 
-Les prochains projets ajoutent la couche production, l'API, les controles d'exploitation et la
-migration depuis les anciens projets LangServe, puis aboutissent a un assistant d'investigation
-documentaire deployable.
+Le prochain projet est le capstone : une plateforme finale deployable qui rassemble interface,
+API, RAG, LangGraph, Deep Agent, evaluation, monitoring et documentation.

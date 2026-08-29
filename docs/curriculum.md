@@ -54,7 +54,16 @@ Livrables :
 
 ### Module 08 : Production
 
-API, authentification, observabilite, couts, securite, CI/CD et migration des anciens projets LangServe.
+Contrats API, healthchecks, readiness probes, authentification, secrets, timeouts, rate limits,
+observabilite, datasets d'evaluation, rollback, Docker, manifest de deploiement et migration des
+anciens projets LangServe vers des APIs typees ou LangGraph/LangSmith Deployment.
+
+Livrables :
+
+- cours complet `course/08-production-and-langserve-migration` ;
+- helpers `production_readiness` ;
+- projet `Production Readiness and LangServe Migration` ;
+- Dockerfile, `render.yaml`, `langgraph.json` et API optionnelle.
 
 ### Module 09 : Projet final
 

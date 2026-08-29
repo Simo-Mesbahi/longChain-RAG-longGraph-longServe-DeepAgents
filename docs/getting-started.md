@@ -24,6 +24,12 @@ Pour executer le projet avec un index Chroma persistant :
 pip install -e ".[dev,rag]"
 ```
 
+Pour lancer l'API optionnelle du module production :
+
+```bash
+pip install -e ".[dev,rag,api]"
+```
+
 Les dependances optionnelles sont separees afin de conserver un environnement minimal pour les
 premiers modules.
 
@@ -37,6 +43,7 @@ Dupliquez `.env.example` vers `.env`, puis remplacez les valeurs factices. Le fi
 | `MODEL_NAME` | Oui | Modele utilise par les exemples |
 | `EMBEDDING_MODEL` | Pour le RAG reel | Modele utilise pour indexer et rechercher |
 | `OPENAI_API_KEY` | Selon provider | Authentification OpenAI |
+| `ASTERIA_API_TOKEN` | Production | Token d'appel de l'API portfolio |
 | `LANGSMITH_TRACING` | Non | Active les traces LangSmith |
 | `LANGSMITH_API_KEY` | Non | Authentification LangSmith |
 

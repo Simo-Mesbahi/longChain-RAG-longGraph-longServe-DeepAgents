@@ -34,7 +34,7 @@ A la fin du parcours, vous saurez :
 | 05 | LangGraph | Workflow stateful controle | Disponible |
 | 06 | LangSmith | Traces et evaluations | Disponible |
 | 07 | Deep Agents | Agent long avec sous-agents | Disponible |
-| 08 | Production et migration LangServe | API et strategie de migration | A venir |
+| 08 | Production et migration LangServe | API et strategie de migration | Disponible |
 | 09 | Projet final | Assistant d'investigation documentaire | A venir |
 
 LangServe est conserve comme sujet de culture et de migration. Il est deprecie pour les nouveaux projets ; le chemin principal du cours s'appuie sur les outils actuels de l'ecosysteme LangChain.
@@ -123,7 +123,8 @@ Le fil rouge sera un **assistant d'investigation documentaire en assurance**. Il
 | [LangGraph Investigation Workflow](projects/03-langgraph-investigation-workflow/README.md) | LangGraph, state, routing, human-in-the-loop | Disponible |
 | [LangSmith Quality Monitoring](projects/04-langsmith-quality-monitoring/README.md) | Traces locales, datasets, evaluateurs, export LangSmith | Disponible |
 | [Deep Agent Investigation Analyst](projects/05-deep-agent-investigation-analyst/README.md) | Planning, sous-agents, fichiers, permissions, memoire | Disponible |
-| Assistant d'investigation deployable | Production, API, securite, migration LangServe | A venir |
+| [Production Readiness and LangServe Migration](projects/06-production-readiness-and-migration/README.md) | API, healthchecks, Docker, migration, rollback | Disponible |
+| Assistant d'investigation deployable | Capstone, interface, production complete | A venir |
 
 ## Documentation
 

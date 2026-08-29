@@ -7,6 +7,10 @@
 : Composant LangGraph qui sauvegarde l'etat d'un thread afin de reprendre, inspecter ou
 interrompre une execution.
 
+**Canary release**
+: Deploiement progressif d'une nouvelle version sur une faible part du trafic afin de detecter
+les regressions avant une bascule complete.
+
 **Context offloading**
 : Pattern qui consiste a ecrire les donnees volumineuses dans des fichiers afin de garder un
 contexte principal court, inspectable et controle.
@@ -41,6 +45,10 @@ eviter les regressions.
 : Evaluation appliquee a des interactions de production afin de surveiller qualite, erreurs,
 latence ou cout.
 
+**Healthcheck**
+: Endpoint ou commande qui verifie qu'un processus repond encore. Il ne garantit pas que toutes
+les dependances metier sont pretes.
+
 **Interrupt**
 : Pause dynamique dans un graphe LangGraph. L'execution reprend ensuite avec `Command(resume=...)`.
 
@@ -51,6 +59,14 @@ streaming et validation humaine.
 **LangSmith**
 : Plateforme d'observabilite et d'evaluation pour tracer, tester, comparer et monitorer des
 applications LLM.
+
+**LangSmith Deployment**
+: Runtime de deploiement pour agents et workflows avec execution durable, streaming et scaling,
+notamment pour les applications LangGraph.
+
+**LangServe**
+: Ancien projet permettant d'exposer des `Runnable` LangChain via FastAPI. Il est deprecie pour
+les nouveaux projets et doit etre traite comme surface legacy.
 
 **Long-term memory**
 : Memoire durable contenant des faits stables ou preferences qui peuvent etre reutilises dans de
@@ -75,8 +91,23 @@ en tete avant la generation.
 **Permission rule**
 : Regle qui autorise, bloque ou interrompt une operation d'agent sur un chemin ou un outil.
 
+**Rate limit**
+: Limite de debit appliquee aux requetes afin de proteger couts, latence, ressources et securite.
+
+**Readiness probe**
+: Endpoint ou commande qui verifie qu'un service peut recevoir du trafic, y compris ses
+dependances critiques.
+
+**Rollback**
+: Retour controle vers une version precedente connue comme saine apres un incident ou une
+regression.
+
 **Skill**
 : Capacite chargeable qui ajoute des instructions, fichiers ou procedures specialisees a un agent.
+
+**SLO**
+: Service Level Objective, objectif mesurable de qualite de service comme disponibilite, latence
+ou taux d'erreur.
 
 **Stateful**
 : Qui conserve un etat utile entre plusieurs etapes ou interactions.

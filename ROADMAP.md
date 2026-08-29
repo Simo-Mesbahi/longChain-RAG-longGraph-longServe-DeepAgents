@@ -38,5 +38,6 @@
 - [x] Planification et gestion du contexte
 - [x] Sous-agents et memoire long terme
 - [x] Sandboxing et securite
+- [x] Readiness production, API, Docker et healthchecks
+- [x] Guide de migration depuis LangServe
 - [ ] Projet final documente et deployable
-- [ ] Guide de migration depuis LangServe

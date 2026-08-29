@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: asteria-investigation-platform
+    env: docker
+    plan: starter
+    dockerfilePath: projects/06-production-readiness-and-migration/Dockerfile
+    healthCheckPath: /health
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: LANGSMITH_TRACING
+        value: "true"
+      - key: LANGSMITH_PROJECT
+        value: asteria-investigation-platform
+      - key: MODEL_PROVIDER
+        value: openai
+      - key: MODEL_NAME
+        value: gpt-4.1-mini
+      - key: EMBEDDING_MODEL
+        value: text-embedding-3-small
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: LANGSMITH_API_KEY
+        sync: false
+      - key: ASTERIA_API_TOKEN
+        sync: false

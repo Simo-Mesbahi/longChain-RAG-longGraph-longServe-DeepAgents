@@ -34,5 +34,8 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 - Module 07 sur Deep Agents : planification, sous-agents, fichiers, permissions, memoire et skills.
 - Helpers Deep Agents deterministes avec filesystem virtuel, quality gate et memoire long terme.
 - Projet Deep Agent Investigation Analyst pour transformer le workflow documentaire en agent long.
+- Module 08 sur la production : contrats API, readiness, healthchecks, Docker, rollback et migration LangServe.
+- Helpers de readiness production avec checks bloquants, manifest de deploiement et plan de migration.
+- Projet Production Readiness and LangServe Migration avec CLI, API FastAPI optionnelle, Dockerfile et `langgraph.json`.
 - Configuration Python, Ruff, Pytest et GitHub Actions.
 - Documentation de contribution, securite et feuille de route.

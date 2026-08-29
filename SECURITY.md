@@ -12,6 +12,7 @@ N'ouvrez pas d'issue publique pour une vulnerabilite exploitable ou une fuite de
 - Validez les arguments des outils et limitez leurs permissions.
 - Isolez l'execution de code genere dans un environnement sandboxe.
 - Conservez une validation humaine pour les decisions a impact eleve.
+- Protegez les endpoints couteux ou mutatifs par authentification et limites de debit.
+- Separez les probes `/health` et `/ready` afin d'eviter d'envoyer du trafic a un service non pret.
 
 Une cle publiee doit etre revoquee immediatement, meme si le commit est ensuite supprime.
-
