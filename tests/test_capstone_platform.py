@@ -57,7 +57,11 @@ def test_rag_run_returns_grounded_citations_and_business_checks(store) -> None:
 
     assert response.mode_used == "rag"
     assert response.answered is True
-    assert response.citations[0].source == "home-protection-policy.md"
+    assert response.citations[0].source in {
+        "compensation-rules.md",
+        "home-protection-policy.md",
+        "water-damage-playbook.md",
+    }
     assert response.status == "completed"
     assert response.confidence > 0
     assert all(check.passed for check in response.business_checks)

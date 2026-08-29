@@ -75,6 +75,16 @@ def test_deployment_artifacts_export_graph_and_drop_root() -> None:
     assert "uvicorn" in dockerfile
 
 
+def test_documentary_corpus_is_enriched_for_professional_demo() -> None:
+    data_dir = Path("projects/02-documentary-rag-assistant/data")
+    documents = sorted(path.name for path in data_dir.glob("*.md"))
+
+    assert len(documents) >= 10
+    assert "water-damage-playbook.md" in documents
+    assert "theft-claim-procedure.md" in documents
+    assert "quality-audit-policy.md" in documents
+
+
 def test_api_health_readiness_and_security_headers() -> None:
     from fastapi.testclient import TestClient
 

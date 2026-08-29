@@ -141,7 +141,7 @@ def platform_metadata() -> dict[str, Any]:
         "version": "1.0.0",
         "environment": os.getenv("ENVIRONMENT", "local"),
         "engines": ["rag", "graph", "deep_agent"],
-        "corpus_documents": 3,
+        "corpus_documents": len(list(CORPUS_DIR.glob("*.md"))),
         "business_scenarios": len(default_business_scenarios()),
         "api_docs": "/api/docs",
     }

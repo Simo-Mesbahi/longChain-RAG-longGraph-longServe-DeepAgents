@@ -50,7 +50,7 @@ La separation des composants permet de distinguer deux echecs souvent confondus 
 
 | Element | Role |
 |---|---|
-| `data/` | Corpus fictif multi-documents |
+| `data/` | Corpus fictif enrichi multi-documents |
 | `evaluation/questions.jsonl` | Questions, sources attendues et reponses de reference |
 | `app.py index` | Construction de l'index persistant et du manifeste |
 | `app.py search` | Inspection des chunks retrouves et de leurs scores |
