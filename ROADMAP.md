@@ -40,4 +40,8 @@
 - [x] Sandboxing et securite
 - [x] Readiness production, API, Docker et healthchecks
 - [x] Guide de migration depuis LangServe
-- [ ] Projet final documente et deployable
+- [x] Projet final documente et deployable
+- [x] Cockpit web responsive et API FastAPI versionnee
+- [x] Routage RAG, LangGraph et Deep Agent
+- [x] Suite d'acceptation metier et release gate
+- [x] Docker, Render, LangGraph et runbook de production

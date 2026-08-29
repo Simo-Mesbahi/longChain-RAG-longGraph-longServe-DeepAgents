@@ -14,3 +14,6 @@ Vous ne vous contenterez pas de recopier des notebooks. Chaque module relie la t
 
 Commencez par [l'installation](getting-started.md), puis suivez le [programme](curriculum.md).
 
+Le parcours se termine par [Asteria Investigation OS](projects.md), une plateforme deployable qui
+route les demandes entre RAG, LangGraph et Deep Agent, affiche les preuves et applique un release
+gate metier avant production.

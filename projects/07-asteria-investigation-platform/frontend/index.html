@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="dark">
+    <meta name="theme-color" content="#090b0c">
+    <meta
+      name="description"
+      content="Asteria Investigation OS, cockpit documentaire RAG, LangGraph et Deep Agents."
+    >
+    <title>Asteria Investigation OS</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+    <script src="/assets/app.js" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Aller au contenu</a>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Asteria Investigation OS, accueil">
+        <span class="brand-mark" aria-hidden="true">A</span>
+        <span>
+          <strong>ASTERIA</strong>
+          <small>INVESTIGATION OS</small>
+        </span>
+      </a>
+
+      <nav class="primary-nav" aria-label="Navigation principale">
+        <button class="nav-tab is-active" type="button" data-view="cockpit">Cockpit</button>
+        <button class="nav-tab" type="button" data-view="scenarios">Scenarios metier</button>
+        <button class="nav-tab" type="button" data-view="architecture">Architecture</button>
+      </nav>
+
+      <button class="system-state" id="access-button" type="button" aria-live="polite">
+        <span class="status-dot" id="system-dot"></span>
+        <span>
+          <small>SYSTEME</small>
+          <strong id="system-label">CONNEXION</strong>
+        </span>
+      </button>
+    </header>
+
+    <main id="workspace">
+      <section class="view is-active" id="view-cockpit" data-view-panel="cockpit">
+        <div class="cockpit-grid">
+          <aside class="control-rail" aria-label="Configuration de l'investigation">
+            <div class="rail-heading">
+              <span class="eyebrow">MISSION CONTROL</span>
+              <span class="counter" id="run-counter">RUN 000</span>
+            </div>
+
+            <fieldset class="control-group">
+              <legend>Moteur d'execution</legend>
+              <div class="mode-selector" role="radiogroup" aria-label="Moteur d'execution">
+                <label>
+                  <input type="radio" name="mode" value="auto" checked>
+                  <span>AUTO</span>
+                </label>
+                <label>
+                  <input type="radio" name="mode" value="rag">
+                  <span>RAG</span>
+                </label>
+                <label>
+                  <input type="radio" name="mode" value="graph">
+                  <span>GRAPH</span>
+                </label>
+                <label>
+                  <input type="radio" name="mode" value="deep_agent">
+                  <span>DEEP</span>
+                </label>
+              </div>
+            </fieldset>
+
+            <div class="control-group switches">
+              <label class="switch-row">
+                <span>
+                  <strong>Revue humaine</strong>
+                  <small>Escalade si les preuves manquent</small>
+                </span>
+                <input id="review-toggle" type="checkbox" checked>
+              </label>
+              <label class="switch-row">
+                <span>
+                  <strong>Gate production</strong>
+                  <small>Bloque les sorties non conformes</small>
+                </span>
+                <input id="production-toggle" type="checkbox" checked>
+              </label>
+            </div>
+
+            <div class="control-group quick-cases">
+              <div class="group-label">
+                <span>Cas rapides</span>
+                <span id="scenario-count">04</span>
+              </div>
+              <button
+                class="case-button"
+                type="button"
+                data-question="Quelle est la franchise contractuelle pour un degat des eaux ?"
+              >
+                <span>01</span>
+                <strong>Franchise habitation</strong>
+                <small>Question factuelle</small>
+              </button>
+              <button
+                class="case-button"
+                type="button"
+                data-question="Quelles pieces et justificatifs faut-il fournir pour un degat des eaux ?"
+              >
+                <span>02</span>
+                <strong>Pieces du dossier</strong>
+                <small>Workflow documentaire</small>
+              </button>
+              <button
+                class="case-button"
+                type="button"
+                data-question="Un score automatique peut-il prouver une fraude et refuser le dossier ?"
+              >
+                <span>03</span>
+                <strong>Score de fraude</strong>
+                <small>Revue obligatoire</small>
+              </button>
+              <button
+                class="case-button"
+                type="button"
+                data-question="Quel remboursement existe pour une couronne dentaire ?"
+              >
+                <span>04</span>
+                <strong>Hors corpus</strong>
+                <small>Refus controle</small>
+              </button>
+            </div>
+
+            <div class="rail-footer">
+              <span>ENV</span>
+              <strong id="environment-label">LOCAL</strong>
+              <span>V1.0.0</span>
+            </div>
+          </aside>
+
+          <section class="mission-workspace" aria-label="Espace d'investigation">
+            <div class="workspace-heading">
+              <div>
+                <span class="eyebrow">NOUVELLE INVESTIGATION</span>
+                <h1>Interroger les preuves.</h1>
+              </div>
+              <span class="keyboard-hint">CTRL + ENTER</span>
+            </div>
+
+            <form class="composer" id="investigation-form">
+              <label class="sr-only" for="question-input">Question d'investigation</label>
+              <textarea
+                id="question-input"
+                name="question"
+                rows="4"
+                minlength="5"
+                maxlength="8000"
+                placeholder="Saisissez une question sur le corpus Asteria..."
+                required
+              ></textarea>
+              <div class="composer-footer">
+                <div class="composer-meta">
+                  <span id="mode-preview">AUTO ROUTING</span>
+                  <span id="character-count">0 / 8000</span>
+                </div>
+                <button class="run-button" id="run-button" type="submit">
+                  <span>Executer</span>
+                  <span aria-hidden="true">&nearr;</span>
+                </button>
+              </div>
+            </form>
+
+            <div class="execution-strip" aria-label="Progression de l'execution">
+              <div class="execution-step" data-stage="analyze">
+                <span>01</span>
+                <strong>Analyser</strong>
+              </div>
+              <div class="execution-step" data-stage="retrieve">
+                <span>02</span>
+                <strong>Recuperer</strong>
+              </div>
+              <div class="execution-step" data-stage="verify">
+                <span>03</span>
+                <strong>Verifier</strong>
+              </div>
+              <div class="execution-step" data-stage="release">
+                <span>04</span>
+                <strong>Publier</strong>
+              </div>
+            </div>
+
+            <section class="result-empty" id="result-empty">
+              <div class="empty-index">00</div>
+              <div>
+                <h2>En attente d'une mission</h2>
+                <p>Le routeur selectionnera RAG, LangGraph ou Deep Agent selon le risque et la complexite.</p>
+              </div>
+            </section>
+
+            <section class="result-panel" id="result-panel" hidden aria-live="polite">
+              <div class="result-header">
+                <div>
+                  <span class="status-badge" id="result-status">TERMINE</span>
+                  <span class="run-id" id="result-run-id">REQ_000000</span>
+                </div>
+                <button class="quiet-button" id="copy-result" type="button">Copier</button>
+              </div>
+
+              <div class="answer-block">
+                <span class="eyebrow">REPONSE VERIFIEE</span>
+                <p id="answer-text"></p>
+                <div class="citation-row" id="citation-row"></div>
+              </div>
+
+              <div class="result-tabs" role="tablist" aria-label="Details du resultat">
+                <button class="result-tab is-active" type="button" data-result-tab="evidence">
+                  Preuves
+                </button>
+                <button class="result-tab" type="button" data-result-tab="tasks">Execution</button>
+                <button class="result-tab" type="button" data-result-tab="audit">Audit</button>
+                <button class="result-tab" type="button" data-result-tab="checks">Controles</button>
+              </div>
+
+              <div class="result-tab-panel is-active" data-result-panel="evidence">
+                <div class="evidence-list" id="evidence-list"></div>
+              </div>
+              <div class="result-tab-panel" data-result-panel="tasks">
+                <div class="task-list" id="task-list"></div>
+              </div>
+              <div class="result-tab-panel" data-result-panel="audit">
+                <ol class="audit-list" id="audit-list"></ol>
+              </div>
+              <div class="result-tab-panel" data-result-panel="checks">
+                <div class="check-list" id="check-list"></div>
+              </div>
+            </section>
+          </section>
+
+          <aside class="intelligence-rail" aria-label="Telemetrie de la plateforme">
+            <div class="telemetry-header">
+              <span class="eyebrow">LIVE TELEMETRY</span>
+              <span class="live-label"><i></i> LIVE</span>
+            </div>
+
+            <section class="score-module">
+              <span>READINESS</span>
+              <strong id="readiness-score">--</strong>
+              <div class="meter" aria-label="Score de readiness">
+                <span id="readiness-meter"></span>
+              </div>
+              <small id="readiness-status">Verification...</small>
+            </section>
+
+            <div class="metric-grid">
+              <div class="metric">
+                <span>LATENCE</span>
+                <strong id="latency-value">--</strong>
+                <small>milliseconds</small>
+              </div>
+              <div class="metric">
+                <span>CONFIANCE</span>
+                <strong id="confidence-value">--</strong>
+                <small>retrieval score</small>
+              </div>
+              <div class="metric">
+                <span>PREUVES</span>
+                <strong id="evidence-value">--</strong>
+                <small>passages trouves</small>
+              </div>
+              <div class="metric">
+                <span>MOTEUR</span>
+                <strong id="engine-value">--</strong>
+                <small>mode resolu</small>
+              </div>
+            </div>
+
+            <section class="engine-stack">
+              <div class="group-label">
+                <span>Engine stack</span>
+                <span>03</span>
+              </div>
+              <div class="engine-row" data-engine="rag">
+                <span>R</span>
+                <div><strong>RAG</strong><small>Factual retrieval</small></div>
+                <i></i>
+              </div>
+              <div class="engine-row" data-engine="graph">
+                <span>G</span>
+                <div><strong>LANGGRAPH</strong><small>Stateful routing</small></div>
+                <i></i>
+              </div>
+              <div class="engine-row" data-engine="deep_agent">
+                <span>D</span>
+                <div><strong>DEEP AGENT</strong><small>Long horizon</small></div>
+                <i></i>
+              </div>
+            </section>
+
+            <section class="trace-module">
+              <div class="group-label">
+                <span>Derniere trace</span>
+                <span id="trace-state">IDLE</span>
+              </div>
+              <code id="trace-id">trace_none</code>
+              <div class="trace-lines" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </section>
+
+            <a class="docs-link" href="/api/docs" target="_blank" rel="noreferrer">
+              <span>OPENAPI CONTRACT</span>
+              <span aria-hidden="true">&nearr;</span>
+            </a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="view-scenarios" data-view-panel="scenarios" hidden>
+        <div class="section-shell">
+          <header class="section-header">
+            <div>
+              <span class="eyebrow">RELEASE GATE</span>
+              <h1>Scenarios metier</h1>
+              <p>La meme surface publique est executee de bout en bout avant chaque mise en production.</p>
+            </div>
+            <button class="run-button" id="evaluate-button" type="button">
+              <span>Lancer la suite</span><span aria-hidden="true">&nearr;</span>
+            </button>
+          </header>
+
+          <div class="release-grid">
+            <section class="release-score">
+              <span>PASS RATE</span>
+              <strong id="pass-rate">--</strong>
+              <small id="release-label">Pas encore execute</small>
+            </section>
+            <section class="release-facts">
+              <div><span>SCENARIOS</span><strong id="scenario-total">04</strong></div>
+              <div><span>VALIDES</span><strong id="scenario-passed">--</strong></div>
+              <div><span>ECHECS</span><strong id="scenario-failed">--</strong></div>
+              <div><span>GATE</span><strong id="release-gate">IDLE</strong></div>
+            </section>
+          </div>
+
+          <div class="scenario-table-wrap">
+            <table class="scenario-table">
+              <thead>
+                <tr>
+                  <th>Scenario</th>
+                  <th>Moteur attendu</th>
+                  <th>Comportement</th>
+                  <th>Source</th>
+                  <th>Statut</th>
+                </tr>
+              </thead>
+              <tbody id="scenario-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="view" id="view-architecture" data-view-panel="architecture" hidden>
+        <div class="section-shell architecture-shell">
+          <header class="section-header">
+            <div>
+              <span class="eyebrow">SYSTEM DESIGN</span>
+              <h1>Une surface, trois moteurs.</h1>
+              <p>Le contrat reste stable pendant que le routeur adapte le niveau d'orchestration.</p>
+            </div>
+            <a class="quiet-button" href="/api/docs" target="_blank" rel="noreferrer">Voir l'API</a>
+          </header>
+
+          <div class="architecture-flow" aria-label="Architecture de la plateforme">
+            <div class="architecture-node input-node">
+              <span>01</span><strong>REQUEST</strong><small>Contrat Pydantic</small>
+            </div>
+            <div class="architecture-node router-node">
+              <span>02</span><strong>RISK ROUTER</strong><small>Complexite et sensibilite</small>
+            </div>
+            <div class="engine-nodes">
+              <div class="architecture-node"><span>R</span><strong>RAG</strong><small>Preuves ciblees</small></div>
+              <div class="architecture-node"><span>G</span><strong>LANGGRAPH</strong><small>Etat et routage</small></div>
+              <div class="architecture-node"><span>D</span><strong>DEEP AGENT</strong><small>Plan et delegation</small></div>
+            </div>
+            <div class="architecture-node gate-node">
+              <span>03</span><strong>QUALITY GATE</strong><small>Citations, audit, readiness</small>
+            </div>
+          </div>
+
+          <div class="contract-grid">
+            <section>
+              <span class="eyebrow">ENTREE</span>
+              <h2>CapstoneRequest</h2>
+              <code>question &middot; mode &middot; human_review &middot; production_gate</code>
+            </section>
+            <section>
+              <span class="eyebrow">SORTIE</span>
+              <h2>CapstoneResponse</h2>
+              <code>answer &middot; citations &middot; evidence &middot; tasks &middot; audit &middot; checks</code>
+            </section>
+            <section>
+              <span class="eyebrow">DEPLOIEMENT</span>
+              <h2>Production surfaces</h2>
+              <code>FastAPI &middot; Docker &middot; Render &middot; LangSmith Deployment</code>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="access-dialog" id="access-dialog">
+      <form method="dialog" id="access-form">
+        <div class="dialog-header">
+          <div>
+            <span class="eyebrow">SECURE ACCESS</span>
+            <h2>Jeton API</h2>
+          </div>
+          <button class="dialog-close" type="submit" value="cancel" aria-label="Fermer">&times;</button>
+        </div>
+        <label for="token-input">Bearer token</label>
+        <input id="token-input" type="password" autocomplete="off" placeholder="ASTERIA_API_TOKEN">
+        <p>Le jeton reste uniquement dans cette session navigateur.</p>
+        <div class="dialog-actions">
+          <button class="quiet-button" type="submit" value="clear">Effacer</button>
+          <button class="run-button" type="submit" value="save">Autoriser</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+  </body>
+</html>

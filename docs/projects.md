@@ -67,7 +67,13 @@ securite, CI/CD, rollback, monitoring et migration de surfaces legacy.
 
 [Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/06-production-readiness-and-migration)
 
-## Suite du fil rouge
+## 07 - Asteria Investigation OS
 
-Le prochain projet est le capstone : une plateforme finale deployable qui rassemble interface,
-API, RAG, LangGraph, Deep Agent, evaluation, monitoring et documentation.
+Le capstone rassemble tous les modules derriere un contrat unique. Son routeur selectionne RAG,
+LangGraph ou Deep Agent, puis applique les invariants de citation, revue humaine, audit et readiness.
+Le cockpit web expose la reponse, les preuves, les taches, les traces et les scenarios metier.
+
+Competences : architecture applicative, routing multi-moteurs, FastAPI, frontend operationnel,
+business acceptance tests, Docker, securite, observabilite et release gates.
+
+[Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/07-asteria-investigation-platform)

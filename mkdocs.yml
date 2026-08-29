@@ -14,6 +14,8 @@ nav:
   - Installation: getting-started.md
   - Programme: curriculum.md
   - Projets: projects.md
+  - Architecture: architecture.md
+  - Operations: operations.md
   - Glossaire: glossary.md
 markdown_extensions:
   - admonition

@@ -182,7 +182,7 @@ def build_default_service(
     """Return the service identity used by the production project."""
     return ServiceMetadata(
         name="asteria-investigation-platform",
-        version="0.1.0",
+        version="1.0.0",
         environment=environment,
         owner="Simo Mesbahi",
     )
@@ -285,6 +285,7 @@ def build_deployment_manifest(
     service: ServiceMetadata,
     *,
     target: DeploymentTarget = "docker",
+    app_dir: str = "projects/06-production-readiness-and-migration",
 ) -> DeploymentManifest:
     """Return an auditable deployment manifest for the platform."""
     return DeploymentManifest(
@@ -295,7 +296,7 @@ def build_deployment_manifest(
             "uvicorn",
             "api:app",
             "--app-dir",
-            "projects/06-production-readiness-and-migration",
+            app_dir,
             "--host",
             "0.0.0.0",
             "--port",

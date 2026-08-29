@@ -1,0 +1,8 @@
+{
+  "$schema": "https://langgra.ph/schema.json",
+  "dependencies": ["../.."],
+  "graphs": {
+    "asteria_investigation": "./agent.py:graph"
+  },
+  "env": "../../.env"
+}

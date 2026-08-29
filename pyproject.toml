@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "langchain-deep-agents-course"
-version = "0.1.0"
+version = "1.0.0"
 description = "Cours francophone de LangChain aux Deep Agents"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -37,6 +37,7 @@ agents = [
 ]
 api = [
   "fastapi>=0.115,<1.0",
+  "httpx>=0.27,<1.0",
   "uvicorn[standard]>=0.32,<1.0",
 ]
 docs = [

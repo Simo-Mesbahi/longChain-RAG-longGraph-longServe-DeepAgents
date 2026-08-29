@@ -1,0 +1,21 @@
+services:
+  - type: web
+    name: asteria-investigation-platform
+    env: docker
+    dockerContext: .
+    dockerfilePath: projects/07-asteria-investigation-platform/Dockerfile
+    healthCheckPath: /health
+    autoDeployTrigger: commit
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: SERVICE_NAME
+        value: asteria-investigation-platform
+      - key: SERVICE_VERSION
+        value: 1.0.0
+      - key: ASTERIA_API_TOKEN
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: LANGSMITH_API_KEY
+        sync: false

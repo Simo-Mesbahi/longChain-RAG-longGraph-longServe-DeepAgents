@@ -23,7 +23,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: pip
       - name: Install project
-        run: python -m pip install -e ".[dev,rag]"
+        run: python -m pip install -e ".[dev,rag,api]"
       - name: Lint
         run: ruff check .
       - name: Format

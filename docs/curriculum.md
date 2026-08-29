@@ -67,7 +67,18 @@ Livrables :
 
 ### Module 09 : Projet final
 
-Assistant d'investigation documentaire en assurance avec preuves, routage, validation humaine, traces et evaluations.
+Asteria Investigation OS : plateforme web avec contrat applicatif unifie, routeur RAG/LangGraph/
+Deep Agent, preuves et citations, revue humaine, quality gates, scenarios d'acceptation, API FastAPI,
+Docker et export LangSmith Deployment.
+
+Livrables :
+
+- cours complet `course/09-capstone` ;
+- moteur `capstone_platform` et tests de contrat ;
+- cockpit web responsive et API versionnee ;
+- suite de quatre scenarios metier utilisee comme release gate ;
+- projet `Asteria Investigation OS` deployable ;
+- documentation d'architecture et runbook de production.
 
 ## Evaluation
 

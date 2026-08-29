@@ -6,6 +6,8 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-08-29
+
 ### Added
 
 - Structure pedagogique complete du parcours.
@@ -37,5 +39,10 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 - Module 08 sur la production : contrats API, readiness, healthchecks, Docker, rollback et migration LangServe.
 - Helpers de readiness production avec checks bloquants, manifest de deploiement et plan de migration.
 - Projet Production Readiness and LangServe Migration avec CLI, API FastAPI optionnelle, Dockerfile et `langgraph.json`.
+- Module 09 capstone avec cours, exercices, quiz, corrections et exemples executables.
+- Moteur Asteria unifie avec contrats Pydantic, routeur RAG/LangGraph/Deep Agent et quality gates.
+- Plateforme Asteria Investigation OS avec cockpit responsive, API v1, CLI et export LangGraph.
+- Suite d'acceptation metier utilisee comme release gate avant production.
+- Docker Compose, blueprint Render, documentation d'architecture et runbook d'exploitation.
 - Configuration Python, Ruff, Pytest et GitHub Actions.
 - Documentation de contribution, securite et feuille de route.

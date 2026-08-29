@@ -11,6 +11,13 @@ interrompre une execution.
 : Deploiement progressif d'une nouvelle version sur une faible part du trafic afin de detecter
 les regressions avant une bascule complete.
 
+**Business check**
+: Invariant metier machine-readable verifie avant de publier une reponse ou une release.
+
+**Capstone**
+: Projet final qui rassemble plusieurs competences du parcours dans un produit testable et
+deployable.
+
 **Context offloading**
 : Pattern qui consiste a ecrire les donnees volumineuses dans des fichiers afin de garder un
 contexte principal court, inspectable et controle.
@@ -98,9 +105,17 @@ en tete avant la generation.
 : Endpoint ou commande qui verifie qu'un service peut recevoir du trafic, y compris ses
 dependances critiques.
 
+**Release gate**
+: Ensemble de conditions qui autorisent ou bloquent une mise en production, comme les tests,
+scenarios metier, controles de securite et readiness.
+
 **Rollback**
 : Retour controle vers une version precedente connue comme saine apres un incident ou une
 regression.
+
+**Risk router**
+: Composant qui choisit un moteur d'execution selon la complexite, la sensibilite et les garde-fous
+requis par une demande.
 
 **Skill**
 : Capacite chargeable qui ajoute des instructions, fichiers ou procedures specialisees a un agent.

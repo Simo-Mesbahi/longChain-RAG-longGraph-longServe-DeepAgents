@@ -33,6 +33,16 @@ pip install -e ".[dev,rag,api]"
 Les dependances optionnelles sont separees afin de conserver un environnement minimal pour les
 premiers modules.
 
+Pour lancer la plateforme capstone :
+
+```bash
+pip install -e ".[dev,api]"
+python projects/07-asteria-investigation-platform/app.py serve --reload
+```
+
+Le cockpit est ensuite disponible sur `http://127.0.0.1:8000` et OpenAPI sur
+`http://127.0.0.1:8000/api/docs`.
+
 ## Variables d'environnement
 
 Dupliquez `.env.example` vers `.env`, puis remplacez les valeurs factices. Le fichier `.env` est ignore par Git.
@@ -53,6 +63,14 @@ Dupliquez `.env.example` vers `.env`, puis remplacez les valeurs factices. Le fi
 python --version
 python -c "import langchain; print(langchain.__version__)"
 pytest
+```
+
+Validation complete du capstone :
+
+```bash
+make quality
+make capstone-evaluate
+make capstone-ready
 ```
 
 Une erreur `ModuleNotFoundError` signifie generalement que l'environnement virtuel n'est pas active ou que les dependances n'ont pas ete installees dans le bon interpreteur.

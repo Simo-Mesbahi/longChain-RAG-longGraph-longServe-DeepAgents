@@ -14,5 +14,7 @@ N'ouvrez pas d'issue publique pour une vulnerabilite exploitable ou une fuite de
 - Conservez une validation humaine pour les decisions a impact eleve.
 - Protegez les endpoints couteux ou mutatifs par authentification et limites de debit.
 - Separez les probes `/health` et `/ready` afin d'eviter d'envoyer du trafic a un service non pret.
+- Affichez les sorties non fiables comme du texte et appliquez une Content Security Policy.
+- N'utilisez pas le rate limiter en memoire du capstone comme limite partagee multi-instance.
 
 Une cle publiee doit etre revoquee immediatement, meme si le commit est ensuite supprime.

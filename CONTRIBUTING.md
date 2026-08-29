@@ -25,6 +25,7 @@ ruff check .
 ruff format --check .
 pytest
 mkdocs build --strict
+python projects/07-asteria-investigation-platform/app.py evaluate
 ```
 
 ## Pull request
@@ -33,4 +34,3 @@ mkdocs build --strict
 2. Limitez la pull request a un objectif coherent.
 3. Expliquez ce qui change et comment le verifier.
 4. Verifiez que la CI est verte.
-

@@ -1,0 +1,15 @@
+services:
+  asteria:
+    build:
+      context: ../..
+      dockerfile: projects/07-asteria-investigation-platform/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      ENVIRONMENT: local
+      SERVICE_NAME: asteria-investigation-platform
+      SERVICE_VERSION: 1.0.0
+    env_file:
+      - path: ../../.env
+        required: false
+    restart: unless-stopped
