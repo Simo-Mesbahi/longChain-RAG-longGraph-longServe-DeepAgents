@@ -29,8 +29,9 @@
 
 - [x] Etat, noeuds, aretes et routage LangGraph
 - [x] Persistance et human-in-the-loop
-- [ ] Traces, jeux de donnees et evaluations LangSmith
+- [x] Traces, jeux de donnees et evaluations LangSmith
 - [x] Workflow d'investigation avec garde-fous
+- [x] Monitoring qualite local et export compatible LangSmith
 
 ## Version 1.0 - Deep Agents
 

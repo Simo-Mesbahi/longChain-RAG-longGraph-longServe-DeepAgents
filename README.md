@@ -32,7 +32,7 @@ A la fin du parcours, vous saurez :
 | 03 | Fondamentaux RAG | Questions-reponses avec sources | Disponible |
 | 04 | RAG avance et evaluation | RAG mesure et optimise | Disponible |
 | 05 | LangGraph | Workflow stateful controle | Disponible |
-| 06 | LangSmith | Traces et evaluations | A venir |
+| 06 | LangSmith | Traces et evaluations | Disponible |
 | 07 | Deep Agents | Agent long avec sous-agents | A venir |
 | 08 | Production et migration LangServe | API et strategie de migration | A venir |
 | 09 | Projet final | Assistant d'investigation documentaire | A venir |
@@ -121,7 +121,8 @@ Le fil rouge sera un **assistant d'investigation documentaire en assurance**. Il
 | [Insurance Claim Intake](projects/01-insurance-claim-intake/README.md) | Pydantic, structured output, async, retries, timeouts | Disponible |
 | [Documentary RAG Assistant](projects/02-documentary-rag-assistant/README.md) | Chroma persistant, citations, evaluation retrieval/generation | Disponible |
 | [LangGraph Investigation Workflow](projects/03-langgraph-investigation-workflow/README.md) | LangGraph, state, routing, human-in-the-loop | Disponible |
-| Assistant d'investigation avance | LangSmith, Deep Agents, production | A venir |
+| [LangSmith Quality Monitoring](projects/04-langsmith-quality-monitoring/README.md) | Traces locales, datasets, evaluateurs, export LangSmith | Disponible |
+| Assistant d'investigation avance | Deep Agents, production | A venir |
 
 ## Documentation
 

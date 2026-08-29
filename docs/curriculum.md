@@ -34,7 +34,8 @@ Etat, noeuds, aretes, routage conditionnel, checkpointers, interruptions, repris
 
 ### Module 06 : LangSmith
 
-Runs, traces, threads, datasets, evaluations offline et online, monitoring et analyse des echecs.
+Traces, runs, projets, datasets, target functions, evaluateurs de code, evaluations offline et
+online, monitoring et transformation des echecs en tests de regression.
 
 ## Bloc 4 - Agents avances
 

@@ -28,5 +28,8 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 - Commande `evaluate-generation` et predictions exemples pour le projet RAG documentaire.
 - Module 05 sur LangGraph : etat, noeuds, aretes, routage, checkpointers et interruptions.
 - Workflow d'investigation documentaire LangGraph avec revue humaine et audit trail.
+- Module 06 sur LangSmith : traces, datasets, target functions, evaluateurs offline et online.
+- Helpers d'evaluation LangSmith-style avec traces locales, metriques de contrat et export SDK.
+- Projet LangSmith Quality Monitoring pour evaluer le workflow LangGraph sur un dataset versionne.
 - Configuration Python, Ruff, Pytest et GitHub Actions.
 - Documentation de contribution, securite et feuille de route.

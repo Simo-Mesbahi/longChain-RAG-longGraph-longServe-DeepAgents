@@ -21,12 +21,24 @@ reponses ouvertes, mais doit etre calibre et surveille.
 : Pattern dans lequel une execution automatisee demande une validation ou une correction humaine
 avant de continuer.
 
+**Evaluation offline**
+: Evaluation lancee avant de deployer, sur un dataset controle, pour comparer des versions et
+eviter les regressions.
+
+**Evaluation online**
+: Evaluation appliquee a des interactions de production afin de surveiller qualite, erreurs,
+latence ou cout.
+
 **Interrupt**
 : Pause dynamique dans un graphe LangGraph. L'execution reprend ensuite avec `Command(resume=...)`.
 
 **LangGraph**
 : Runtime d'orchestration pour construire des workflows LLM stateful avec routage, persistence,
 streaming et validation humaine.
+
+**LangSmith**
+: Plateforme d'observabilite et d'evaluation pour tracer, tester, comparer et monitorer des
+applications LLM.
 
 **LCEL**
 : LangChain Expression Language, syntaxe de composition des composants LangChain avec l'operateur `|`.
@@ -52,3 +64,7 @@ en tete avant la generation.
 
 **Trace**
 : Enregistrement structure des etapes, entrees, sorties, erreurs et durees d'une execution.
+
+**Target function**
+: Fonction evaluee par LangSmith. Elle recoit les `inputs` d'un exemple et retourne les sorties a
+noter par les evaluateurs.

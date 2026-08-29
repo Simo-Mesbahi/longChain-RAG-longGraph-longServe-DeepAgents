@@ -34,7 +34,18 @@ human-in-the-loop et audit trail.
 
 [Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/03-langgraph-investigation-workflow)
 
+## 04 - LangSmith Quality Monitoring
+
+Le workflow LangGraph est evalue comme une cible LangSmith : dataset `inputs`/`outputs`/`metadata`,
+runs locaux, traces derivees de l'audit trail, evaluateurs deterministes et export compatible
+avec `Client.create_examples`.
+
+Competences : observabilite, traces, datasets, target function, evaluateurs offline, monitoring
+qualite, export LangSmith et tests de regression.
+
+[Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/04-langsmith-quality-monitoring)
+
 ## Suite du fil rouge
 
-Les prochains projets ajouteront des traces LangSmith, des datasets geres et des evaluations
-plus riches, puis aboutiront a un assistant d'investigation documentaire deployable.
+Les prochains projets ajouteront les Deep Agents, la memoire, les sous-agents et la preparation
+production, puis aboutiront a un assistant d'investigation documentaire deployable.
