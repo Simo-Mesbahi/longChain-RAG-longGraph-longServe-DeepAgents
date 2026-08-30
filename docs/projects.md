@@ -67,7 +67,7 @@ securite, CI/CD, rollback, monitoring et migration de surfaces legacy.
 
 [Ouvrir le projet sur GitHub](https://github.com/Simo-Mesbahi/longChain-RAG-longGraph-longServe-DeepAgents/tree/main/projects/06-production-readiness-and-migration)
 
-## 07 - Asteria Investigation OS
+## 07 - AtlasDocAI
 
 Le capstone rassemble tous les modules derriere un contrat unique. Son routeur selectionne RAG,
 LangGraph ou Deep Agent, puis applique les invariants de citation, revue humaine, audit et readiness.

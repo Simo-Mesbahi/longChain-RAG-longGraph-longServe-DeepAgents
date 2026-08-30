@@ -1,6 +1,6 @@
 # Runbook de production
 
-Ce runbook decrit comment valider, demarrer, observer et restaurer la plateforme Asteria.
+Ce runbook decrit comment valider, demarrer, observer et restaurer la plateforme AtlasDocAI.
 
 ## Preflight
 

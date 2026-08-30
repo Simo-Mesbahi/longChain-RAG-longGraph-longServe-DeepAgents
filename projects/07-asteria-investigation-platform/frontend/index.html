@@ -2,14 +2,14 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="color-scheme" content="light" />
-    <meta name="theme-color" content="#f7f8fa" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" content="#fafbfc" />
     <meta
       name="description"
-      content="Asteria, votre espace de travail documentaire : questions, sources et analyses tra&ccedil;ables."
+      content="AtlasDocAI, votre espace d'analyse documentaire : des r&eacute;ponses claires, des sources accessibles et des d&eacute;cisions &eacute;clair&eacute;es."
     />
-    <title>Asteria | Assistant documentaire</title>
+    <title>AtlasDocAI | Assistant documentaire</title>
     <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" />
     <link
       rel="preload"
@@ -18,6 +18,7 @@
       type="font/woff2"
       crossorigin
     />
+    <script src="/assets/theme.js"></script>
     <link rel="stylesheet" href="/assets/styles.css" />
     <script src="/assets/app.js" defer></script>
   </head>
@@ -25,15 +26,27 @@
     <a class="skip-link" href="#workspace">Aller au contenu</a>
     <div class="app-shell">
       <aside class="sidebar" aria-label="Espace de travail">
-        <a class="brand" href="/" aria-label="Asteria, accueil">
-          <span class="brand-mark" aria-hidden="true">a<span>.</span></span>
-          <span><strong>asteria</strong><small>Intelligence documentaire</small></span>
+        <a class="brand" href="/" aria-label="AtlasDocAI, accueil">
+          <span class="brand-mark" aria-hidden="true"
+            ><svg class="icon">
+              <use href="/assets/icons.svg#atlas-mark"></use></svg
+          ></span>
+          <span
+            ><strong>AtlasDoc<span class="brand-ai">AI</span></strong
+            ><small>Intelligence documentaire</small></span
+          >
         </a>
-        <button class="button new-question" id="new-question" type="button">
+        <button
+          class="button new-question"
+          id="new-question"
+          type="button"
+          aria-label="Nouvelle question"
+          title="Nouvelle question"
+        >
           <svg class="icon" aria-hidden="true">
             <use href="/assets/icons.svg#plus"></use>
           </svg>
-          Nouvelle question
+          <span>Nouvelle question</span>
         </button>
         <span class="nav-heading">Espace de travail</span>
         <nav class="primary-nav" aria-label="Navigation principale">
@@ -71,11 +84,18 @@
               <use href="/assets/icons.svg#arrow-up-right"></use>
             </svg>
           </a>
-          <button class="sidebar-link" id="access-button" type="button" aria-haspopup="dialog">
+          <button
+            class="sidebar-link"
+            id="access-button"
+            type="button"
+            aria-haspopup="dialog"
+            aria-label="Acc&egrave;s &agrave; la plateforme"
+            title="Acc&egrave;s &agrave; la plateforme"
+          >
             <svg class="icon" aria-hidden="true">
               <use href="/assets/icons.svg#settings"></use>
             </svg>
-            Acc&egrave;s &agrave; la plateforme
+            <span>Acc&egrave;s &agrave; la plateforme</span>
           </button>
           <div class="workspace-identity">
             <span class="workspace-avatar" aria-hidden="true">A</span>
@@ -100,15 +120,46 @@
               aria-label="Questions r&eacute;centes"
               title="Questions r&eacute;centes"
             >
-              <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#clock"></use></svg>
+              <svg class="icon" aria-hidden="true">
+                <use href="/assets/icons.svg#clock"></use>
+              </svg>
             </button>
           </div>
           <div class="topbar-status">
-            <span class="demo-badge">D&eacute;monstration</span>
             <span class="system-state" id="system-state" role="status"
               ><span class="status-dot" aria-hidden="true"></span
               ><span id="system-label">Connexion...</span></span
             >
+            <fieldset class="theme-control" aria-label="Apparence">
+              <legend class="sr-only">Apparence</legend>
+              <label title="Th&egrave;me automatique">
+                <input
+                  type="radio"
+                  name="theme"
+                  value="system"
+                  aria-label="Th&egrave;me automatique"
+                  checked
+                />
+                <span
+                  ><svg class="icon small" aria-hidden="true">
+                    <use href="/assets/icons.svg#monitor"></use></svg
+                ></span>
+              </label>
+              <label title="Th&egrave;me clair">
+                <input type="radio" name="theme" value="light" aria-label="Th&egrave;me clair" />
+                <span
+                  ><svg class="icon small" aria-hidden="true">
+                    <use href="/assets/icons.svg#sun"></use></svg
+                ></span>
+              </label>
+              <label title="Th&egrave;me sombre">
+                <input type="radio" name="theme" value="dark" aria-label="Th&egrave;me sombre" />
+                <span
+                  ><svg class="icon small" aria-hidden="true">
+                    <use href="/assets/icons.svg#moon"></use></svg
+                ></span>
+              </label>
+            </fieldset>
           </div>
         </header>
         <main id="workspace" tabindex="-1">
@@ -133,9 +184,12 @@
           >
             <header class="page-heading">
               <div>
-                <p class="eyebrow">Votre espace d'analyse</p>
-                <h1 id="assistant-heading">Assistant documentaire</h1>
-                <p>Des r&eacute;ponses claires, ancr&eacute;es dans vos documents.</p>
+                <p class="eyebrow">
+                  <span class="eyebrow-line" aria-hidden="true"></span>Votre intelligence
+                  documentaire
+                </p>
+                <h1 id="assistant-heading">Explorez vos documents.</h1>
+                <p>Une question. Des sources. Une vision plus claire.</p>
               </div>
               <span class="scope-badge"
                 ><svg class="icon small" aria-hidden="true">
@@ -201,9 +255,7 @@
                 </details>
 
                 <section class="suggestions" id="suggestions" aria-labelledby="suggestions-heading">
-                  <h2 class="section-label" id="suggestions-heading">
-                    Quelques points de d&eacute;part
-                  </h2>
+                  <h2 class="section-label" id="suggestions-heading">&Agrave; explorer</h2>
                   <div class="suggestion-grid">
                     <button
                       class="case-button"
@@ -271,8 +323,7 @@
                     ><svg class="icon" aria-hidden="true">
                       <use href="/assets/icons.svg#message-square"></use></svg
                   ></span>
-                  <h2>Votre analyse commence ici</h2>
-                  <p>Les r&eacute;ponses et leurs sources appara&icirc;tront dans cet espace.</p>
+                  <h2>Pr&ecirc;t pour votre premi&egrave;re question</h2>
                 </section>
 
                 <section
@@ -283,7 +334,10 @@
                 >
                   <header class="result-header">
                     <div class="result-title">
-                      <span class="answer-mark" aria-hidden="true">a.</span>
+                      <span class="answer-mark" aria-hidden="true"
+                        ><svg class="icon small">
+                          <use href="/assets/icons.svg#atlas-mark"></use></svg
+                      ></span>
                       <h2 id="answer-heading" tabindex="-1">R&eacute;sultat de l'analyse</h2>
                     </div>
                     <div class="result-actions">
@@ -431,6 +485,7 @@
 
               <aside class="context-rail" aria-label="Contexte documentaire">
                 <section class="context-section">
+                  <p class="rail-eyebrow">Votre collection</p>
                   <div class="context-heading">
                     <svg class="icon" aria-hidden="true">
                       <use href="/assets/icons.svg#book-open"></use>
@@ -446,17 +501,35 @@
                     <li>
                       <svg class="icon small" aria-hidden="true">
                         <use href="/assets/icons.svg#file-text"></use></svg
-                      >Garanties et indemnisation
+                      ><button
+                        class="topic-button"
+                        type="button"
+                        data-question="Quelles sont les regles d'indemnisation et les franchises ?"
+                      >
+                        Garanties et indemnisation
+                      </button>
                     </li>
                     <li>
                       <svg class="icon small" aria-hidden="true">
                         <use href="/assets/icons.svg#file-text"></use></svg
-                      >Proc&eacute;dures de gestion
+                      ><button
+                        class="topic-button"
+                        type="button"
+                        data-question="Quelles pieces et justificatifs faut-il fournir pour un degat des eaux ?"
+                      >
+                        Proc&eacute;dures de gestion
+                      </button>
                     </li>
                     <li>
                       <svg class="icon small" aria-hidden="true">
                         <use href="/assets/icons.svg#file-text"></use></svg
-                      >Qualit&eacute; et revue humaine
+                      ><button
+                        class="topic-button"
+                        type="button"
+                        data-question="Quand faut-il demander une revue humaine du dossier ?"
+                      >
+                        Qualit&eacute; et revue humaine
+                      </button>
                     </li>
                   </ul>
                 </section>
@@ -608,7 +681,7 @@
                 <dl class="system-facts">
                   <div>
                     <dt>Application</dt>
-                    <dd>Asteria Investigation OS</dd>
+                    <dd>AtlasDocAI</dd>
                   </div>
                   <div>
                     <dt>Version</dt>
@@ -687,7 +760,7 @@
           </section>
         </main>
         <footer class="page-footer">
-          <span>Asteria <span aria-hidden="true">&middot;</span> LangChain &amp; Deep Agents</span
+          <span>AtlasDocAI <span aria-hidden="true">&middot;</span> Intelligence documentaire</span
           ><span>Un projet pour apprendre, un espace pour explorer.</span>
         </footer>
       </div>
@@ -703,7 +776,7 @@
         <header class="dialog-header">
           <div>
             <p class="eyebrow">Param&egrave;tres de connexion</p>
-            <h2 id="access-heading">Acc&egrave;s &agrave; Asteria</h2>
+            <h2 id="access-heading">Acc&egrave;s &agrave; AtlasDocAI</h2>
           </div>
           <button
             class="icon-button"
@@ -728,7 +801,7 @@
           type="password"
           autocomplete="off"
           spellcheck="false"
-          placeholder="Votre jeton Asteria"
+          placeholder="Votre jeton AtlasDocAI"
         />
         <p class="dialog-note">
           Ne saisissez pas votre cl&eacute; OpenAI ou LangSmith ici. Le jeton reste dans cette
@@ -745,7 +818,9 @@
         <header class="dialog-header">
           <h2 id="recent-heading">Questions r&eacute;centes</h2>
           <button class="icon-button" aria-label="Fermer l'historique" title="Fermer" type="submit">
-            <svg class="icon" aria-hidden="true"><use href="/assets/icons.svg#x"></use></svg>
+            <svg class="icon" aria-hidden="true">
+              <use href="/assets/icons.svg#x"></use>
+            </svg>
           </button>
         </header>
       </form>

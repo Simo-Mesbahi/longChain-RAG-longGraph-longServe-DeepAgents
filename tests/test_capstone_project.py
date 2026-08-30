@@ -86,7 +86,15 @@ def test_frontend_tabs_have_accessible_panels_and_roving_focus() -> None:
 
 
 @pytest.mark.parametrize(
-    "asset", ["styles.css", "app.js", "icons.svg", "favicon.svg", "inter-latin-wght-normal.woff2"]
+    "asset",
+    [
+        "styles.css",
+        "app.js",
+        "theme.js",
+        "icons.svg",
+        "favicon.svg",
+        "inter-latin-wght-normal.woff2",
+    ],
 )
 def test_frontend_assets_are_served_locally(asset: str) -> None:
     from fastapi.testclient import TestClient
@@ -105,6 +113,23 @@ def test_frontend_design_has_responsive_and_motion_safe_states() -> None:
     assert "linear-gradient" not in css
     assert "radial-gradient" not in css
     assert re.search(r"\.result-panel\s*\{", css)
+
+
+def test_atlasdocai_brand_and_appearance_contract() -> None:
+    from fastapi.testclient import TestClient
+
+    client = TestClient(load_api_module().app)
+    assert client.get("/api/v1/platform").json()["name"] == "AtlasDocAI"
+    assert client.get("/api/openapi.json").json()["info"]["title"] == "AtlasDocAI"
+    html = (FRONTEND_DIR / "index.html").read_text(encoding="utf-8")
+    assert "<title>AtlasDocAI |" in html
+    assert "Asteria" not in html
+    assert html.index('src="/assets/theme.js"') < html.index('href="/assets/styles.css"')
+    parser = IdCollector()
+    parser.feed(html)
+    choices = [attrs for _, attrs in parser.elements if attrs.get("name") == "theme"]
+    assert {choice["value"] for choice in choices} == {"system", "light", "dark"}
+    assert all(choice.get("aria-label") for choice in choices)
 
 
 def test_deployment_artifacts_export_graph_and_drop_root() -> None:

@@ -34,9 +34,14 @@ jobs:
   ui:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     env:
       ASTERIA_UI_TESTS: "1"
       ASTERIA_UI_SCREENSHOTS: artifacts/ui
+      ASTERIA_UI_BROWSER: ${{ matrix.browser }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -47,15 +52,15 @@ jobs:
           cache: pip
       - name: Install browser test dependencies
         run: python -m pip install -e ".[dev,api,ui]"
-      - name: Install Chromium
-        run: python -m playwright install --with-deps chromium
+      - name: Install browser
+        run: python -m playwright install --with-deps ${{ matrix.browser }}
       - name: Test interface and real API
         run: python -m pytest tests/test_capstone_ui.py --no-cov
       - name: Keep interface screenshots
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: asteria-interface
+          name: atlasdocai-interface-${{ matrix.browser }}
           path: artifacts/ui
           retention-days: 7
 

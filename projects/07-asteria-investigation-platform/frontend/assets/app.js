@@ -94,7 +94,7 @@ function bindNavigation() {
   $$("[data-view]").forEach((button) => {
     button.addEventListener("click", () => setView(button.dataset.view));
   });
-  $$(".case-button").forEach((button) => {
+  $$(".case-button, .topic-button").forEach((button) => {
     button.addEventListener("click", () => prepareQuestion(button.dataset.question));
   });
   $("#new-question").addEventListener("click", () => prepareQuestion(""));
@@ -124,7 +124,7 @@ function setView(name) {
     panel.hidden = panel.dataset.viewPanel !== name;
   });
   $("#view-label").textContent = labels[name];
-  document.title = "Asteria | " + labels[name];
+  document.title = "AtlasDocAI | " + labels[name];
   window.scrollTo({ top: 0, behavior: scrollBehavior() });
 }
 
@@ -289,7 +289,7 @@ function setLoading(loading) {
   $("#suggestions").hidden = loading || Boolean(state.lastResponse);
   const controls = [
     ...$$("input, select, textarea, button", elements.form),
-    ...$$(".case-button, .history-list button, .scenario-open"),
+    ...$$(".case-button, .topic-button, .history-list button, .scenario-open"),
     $("#new-question"),
     $("#review-toggle"),
     $("#production-toggle"),
@@ -581,7 +581,7 @@ function downloadLastResult() {
   if (!state.lastResponse) return;
   const response = state.lastResponse;
   const text = [
-    "ASTERIA | Rapport d'analyse",
+    "AtlasDocAI | Rapport d'analyse",
     "D\u00e9monstration p\u00e9dagogique - corpus fictif",
     "",
     "Question : " + response.question,
@@ -607,7 +607,7 @@ function downloadLastResult() {
   const url = URL.createObjectURL(new Blob([text], { type: "text/plain;charset=utf-8" }));
   const link = make("a");
   link.href = url;
-  link.download = "asteria-" + response.request_id.replace(/[^a-z0-9_-]/gi, "") + ".txt";
+  link.download = "atlasdocai-" + response.request_id.replace(/[^a-z0-9_-]/gi, "") + ".txt";
   document.body.append(link);
   link.click();
   link.remove();
@@ -648,7 +648,7 @@ async function apiFetch(path, options = {}) {
 
 function friendlyError(error) {
   if (error.status === 401)
-    return "Acc\u00e8s prot\u00e9g\u00e9 : renseignez le jeton Asteria, puis relancez votre demande.";
+    return "Acc\u00e8s prot\u00e9g\u00e9 : renseignez le jeton AtlasDocAI, puis relancez votre demande.";
   if (error.status === 429)
     return "Trop de demandes. Patientez une minute avant de r\u00e9essayer.";
   if (error.status === 422)
@@ -658,7 +658,7 @@ function friendlyError(error) {
   if (error.status >= 500)
     return "Le serveur a rencontr\u00e9 une erreur. Votre question est conserv\u00e9e ; vous pouvez r\u00e9essayer.";
   if (error.message === "INVALID_RESPONSE")
-    return "La r\u00e9ponse du serveur est illisible. V\u00e9rifiez que l'API Asteria est d\u00e9marr\u00e9e.";
+    return "La r\u00e9ponse du serveur est illisible. V\u00e9rifiez que l'API AtlasDocAI est d\u00e9marr\u00e9e.";
   return "Connexion au serveur impossible. V\u00e9rifiez que l'application est d\u00e9marr\u00e9e, puis r\u00e9essayez.";
 }
 

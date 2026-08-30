@@ -1,4 +1,4 @@
-# Asteria Investigation OS
+# AtlasDocAI
 
 Plateforme capstone du cours **De LangChain aux Deep Agents**. Elle rassemble une interface web,
 une API FastAPI versionnee, un moteur RAG, un workflow LangGraph, un Deep Agent, des citations,
@@ -6,6 +6,11 @@ des garde-fous humains, un journal d'audit et une suite de tests metier.
 
 Le corpus et les decisions sont fictifs. La plateforme aide a structurer une investigation ;
 elle ne prend jamais seule une decision de fraude ou d'indemnisation.
+
+Anciennement Asteria Investigation OS. Le chemin `projects/07-asteria-investigation-platform`,
+les variables `ASTERIA_*`, la cle de session du jeton, les identifiants Docker et LangGraph restent
+inchanges pour preserver les installations existantes. Le nom public est desormais AtlasDocAI,
+y compris dans l'API, la CLI et les rapports telecharges.
 
 ## Demarrage local
 
@@ -19,7 +24,7 @@ Ouvrir ensuite `http://127.0.0.1:8000`. La documentation OpenAPI est disponible 
 
 ## Interface web
 
-L'interface claire privilegie la question, la reponse et les sources. Elle ne necessite ni Node.js,
+L'interface adaptative privilegie la question, la reponse et les sources. Elle ne necessite ni Node.js,
 ni compilation frontend, ni CDN : HTML, CSS, JavaScript, police et icones sont servis par FastAPI.
 
 | Espace | Fonctions |
@@ -29,15 +34,34 @@ ni compilation frontend, ni CDN : HTML, CSS, JavaScript, police et icones sont s
 | Questions recentes | Huit dernieres analyses, conservees uniquement en memoire dans la page |
 | Validations | Execution des scenarios de reference et ouverture d'un cas dans l'assistant |
 | Plateforme | Configuration, fonctionnement des moteurs et controles de demonstration |
-| Acces | Jeton Asteria facultatif en local, conserve dans la session navigateur |
+| Apparence | Automatique, claire ou sombre, depuis les trois icones de la barre superieure |
+| Acces | Jeton AtlasDocAI facultatif en local, conserve dans la session navigateur |
 
-L'historique disparait au rechargement. Le jeton Asteria n'est ni une cle OpenAI ni une cle LangSmith.
+L'historique disparait au rechargement. Le jeton AtlasDocAI n'est ni une cle OpenAI ni une cle LangSmith.
 La zone de connexion ne doit jamais recevoir ces cles fournisseur.
 
 Les onglets de resultat sont navigables avec les fleches, Home et End. Ctrl+Entree ou Cmd+Entree
 lance l'analyse. Les animations respectent la preference systeme de reduction des mouvements.
 Les requetes concurrentes accidentelles sont bloquees, les erreurs restent visibles et la question
 est conservee pour une nouvelle tentative. Aucun delai artificiel n'est ajoute aux reponses.
+
+### Apparence et adaptation
+
+- Le mode automatique suit `prefers-color-scheme`, y compris un changement systeme pendant la session.
+- Un choix clair ou sombre est memorise dans `localStorage` (`atlasdocai_theme`) et synchronise entre
+  onglets. Revenir au mode automatique efface ce choix. Aucun document ni secret n'y est stocke.
+- Le theme est applique avant la feuille de style pour eviter un flash clair au chargement.
+  Le script reste local et respecte la Content Security Policy, sans script inline.
+- Si le stockage est bloque, le choix reste utilisable pour la page courante. Sans JavaScript, la
+  feuille de style suit encore le systeme et un message indique les limites de l'interface.
+- La navigation laterale devient une barre inferieure sur mobile et tablette jusqu'a 820 pixels.
+  Les marges prennent en compte les zones de securite des appareils et les interactions tactiles.
+- Les exemples et les sujets de la collection preparent une question editable. Aucune analyse
+  n'est lancee sans action explicite sur le bouton Analyser.
+
+Navigateurs cibles : versions recentes de Chrome/Edge, Firefox et Safari. Les trois moteurs
+Chromium, Firefox et WebKit sont testes en CI ; cela ne remplace pas une recette sur un appareil
+physique ni ne garantit les anciennes versions des navigateurs.
 
 **Limite explicite :** le moteur de cette interface reste local et deterministe, sans appel OpenAI.
 Les traces sont locales. Les scores de recherche ne sont pas des probabilites de veracite et un
@@ -52,17 +76,22 @@ Depuis la racine du depot :
 
 ```bash
 python -m pip install -e ".[dev,api,ui]"
-python -m playwright install chromium
+python -m playwright install chromium firefox webkit
 ASTERIA_UI_TESTS=1 python -m pytest tests/test_capstone_ui.py --no-cov
+ASTERIA_UI_TESTS=1 ASTERIA_UI_BROWSER=firefox python -m pytest tests/test_capstone_ui.py --no-cov
+ASTERIA_UI_TESTS=1 ASTERIA_UI_BROWSER=webkit python -m pytest tests/test_capstone_ui.py --no-cov
 ```
 
 La suite demarre et arrete son propre serveur sur un port libre, avec un jeton de test. Elle couvre
-les affichages de 320 a 1440 pixels, les trois moteurs, les sources, l'export, les erreurs reseau,
+les affichages de 320 a 1920 pixels, les trois moteurs, les sources, l'export, les erreurs reseau,
 l'authentification, le clavier et la protection contre le rendu HTML non fiable. Aucun secret reel
-n'est necessaire. Sans `ASTERIA_UI_TESTS=1`, ces tests sont ignores par la suite Python ordinaire.
+n'est necessaire. Les themes systeme/manuels, leur persistance, la synchronisation des onglets,
+le stockage indisponible et le mode sans JavaScript sont aussi couverts.
+Sans `ASTERIA_UI_TESTS=1`, ces tests sont ignores par la suite Python ordinaire.
 
 Pour conserver les captures, ajouter `ASTERIA_UI_SCREENSHOTS=/tmp/asteria-ui`. La CI lance les tests
-navigateur et conserve les captures pendant sept jours dans l'artefact `asteria-interface`.
+navigateur et conserve les captures pendant sept jours dans les artefacts
+`atlasdocai-interface-chromium`, `atlasdocai-interface-firefox` et `atlasdocai-interface-webkit`.
 
 ## CLI
 

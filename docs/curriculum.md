@@ -67,7 +67,7 @@ Livrables :
 
 ### Module 09 : Projet final
 
-Asteria Investigation OS : plateforme web avec contrat applicatif unifie, routeur RAG/LangGraph/
+AtlasDocAI : plateforme web avec contrat applicatif unifie, routeur RAG/LangGraph/
 Deep Agent, preuves et citations, revue humaine, quality gates, scenarios d'acceptation, API FastAPI,
 Docker et export LangSmith Deployment.
 
@@ -77,7 +77,7 @@ Livrables :
 - moteur `capstone_platform` et tests de contrat ;
 - cockpit web responsive et API versionnee ;
 - suite de quatre scenarios metier utilisee comme release gate ;
-- projet `Asteria Investigation OS` deployable ;
+- projet `AtlasDocAI` deployable ;
 - documentation d'architecture et runbook de production.
 
 ## Evaluation

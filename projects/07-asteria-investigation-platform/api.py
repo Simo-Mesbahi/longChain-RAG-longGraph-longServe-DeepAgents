@@ -1,4 +1,4 @@
-"""FastAPI surface and static cockpit for the Asteria capstone platform."""
+"""FastAPI surface and static workspace for the AtlasDocAI capstone platform."""
 
 from __future__ import annotations
 
@@ -65,7 +65,7 @@ class InMemoryRateLimiter:
 
 limiter = InMemoryRateLimiter()
 app = FastAPI(
-    title="Asteria Investigation OS",
+    title="AtlasDocAI",
     description="Capstone API for the LangChain to Deep Agents course.",
     version="1.0.0",
     docs_url="/api/docs",
@@ -137,7 +137,7 @@ def ready() -> dict[str, Any]:
 @app.get("/api/v1/platform", tags=["platform"])
 def platform_metadata() -> dict[str, Any]:
     return {
-        "name": "Asteria Investigation OS",
+        "name": "AtlasDocAI",
         "version": "1.0.0",
         "environment": os.getenv("ENVIRONMENT", "local"),
         "engines": ["rag", "graph", "deep_agent"],

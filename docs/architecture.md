@@ -1,6 +1,6 @@
 # Architecture du capstone
 
-Cette page decrit l'architecture de **Asteria Investigation OS**, le projet final du parcours. Elle
+Cette page decrit l'architecture de **AtlasDocAI**, le projet final du parcours. Elle
 complete le code avec les decisions, frontieres et risques necessaires a une revue professionnelle.
 
 ## Vue systeme

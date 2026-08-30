@@ -77,11 +77,12 @@ def server_url():
 @pytest.fixture(scope="module")
 def browser():
     with pw.sync_playwright() as playwright:
+        browser_name = os.getenv("ASTERIA_UI_BROWSER", "chromium")
         executable = os.getenv("ASTERIA_CHROMIUM_EXECUTABLE")
-        instance = playwright.chromium.launch(
+        instance = getattr(playwright, browser_name).launch(
             headless=True,
-            executable_path=executable or None,
-            args=["--no-sandbox", "--disable-dev-shm-usage"],
+            executable_path=(executable or None) if browser_name == "chromium" else None,
+            args=["--no-sandbox", "--disable-dev-shm-usage"] if browser_name == "chromium" else [],
         )
         yield instance
         instance.close()
@@ -90,7 +91,10 @@ def browser():
 @pytest.fixture
 def page(browser, server_url):
     context = browser.new_context(
-        viewport={"width": 1440, "height": 1000}, locale="fr-FR", reduced_motion="reduce"
+        viewport={"width": 1440, "height": 1000},
+        locale="fr-FR",
+        reduced_motion="reduce",
+        color_scheme="light",
     )
     context.add_init_script(f"sessionStorage.setItem('asteria_api_token', {json.dumps(TOKEN)});")
     page = context.new_page()
@@ -136,7 +140,7 @@ def assert_no_page_overflow(page) -> None:
     assert sizes["actual"] <= sizes["expected"], sizes
 
 
-@pytest.mark.parametrize("width", [320, 390, 768, 1024, 1440])
+@pytest.mark.parametrize("width", [320, 390, 768, 1024, 1440, 1920])
 def test_responsive_views_and_real_results(page, width: int) -> None:
     page.set_viewport_size({"width": width, "height": 950})
     pw.expect(page.locator("#assistant-heading")).to_be_visible()
@@ -207,7 +211,9 @@ def test_sources_keyboard_tabs_history_copy_and_download(page, tmp_path: Path) -
         page.locator("#download-result").click()
     target = tmp_path / "report.txt"
     download.value.save_as(target)
+    assert download.value.suggested_filename.startswith("atlasdocai-")
     report = target.read_text(encoding="utf-8")
+    assert report.startswith("AtlasDocAI |")
     assert original in report
     assert "SOURCES" in report
     assert TOKEN not in report
@@ -341,3 +347,105 @@ def test_explicit_mode_and_advanced_options_reach_api(page) -> None:
     assert payload["require_human_review_on_insufficient"] is False
     assert payload["enforce_production_gate"] is False
     pw.expect(page.locator("#engine-value")).to_have_text("LangGraph")
+
+
+@pytest.mark.parametrize("scheme", ["light", "dark"])
+def test_appearance_follows_system_and_persists_override(page, scheme: str) -> None:
+    page.emulate_media(color_scheme=scheme)
+    pw.expect(page.locator("html")).to_have_attribute("data-theme", scheme)
+    pw.expect(page.get_by_role("radio", name="Th\u00e8me automatique")).to_be_checked()
+    other = "dark" if scheme == "light" else "light"
+    page.locator(f'input[name="theme"][value="{other}"]').check()
+    assert page.evaluate("localStorage.getItem('atlasdocai_theme')") == other
+    page.reload()
+    pw.expect(page.locator("html")).to_have_attribute("data-theme", other)
+    page.emulate_media(color_scheme=scheme)
+    pw.expect(page.locator("html")).to_have_attribute("data-theme", other)
+    page.get_by_role("radio", name="Th\u00e8me automatique").check()
+    pw.expect(page.locator("html")).to_have_attribute("data-theme", scheme)
+    assert page.evaluate("localStorage.getItem('atlasdocai_theme')") is None
+    page.emulate_media(color_scheme=other)
+    pw.expect(page.locator("html")).to_have_attribute("data-theme", other)
+
+
+def test_appearance_syncs_tabs_and_handles_storage_clear(page, server_url) -> None:
+    sibling = page.context.new_page()
+    try:
+        sibling.goto(server_url)
+        page.get_by_role("radio", name="Th\u00e8me sombre").check()
+        pw.expect(sibling.locator("html")).to_have_attribute("data-theme", "dark")
+        pw.expect(sibling.get_by_role("radio", name="Th\u00e8me sombre")).to_be_checked()
+        page.evaluate("localStorage.clear()")
+        pw.expect(sibling.get_by_role("radio", name="Th\u00e8me automatique")).to_be_checked()
+        pw.expect(sibling.locator("html")).to_have_attribute("data-theme", "light")
+    finally:
+        sibling.close()
+
+
+@pytest.mark.parametrize("width", [390, 1440])
+def test_dark_workspace_results_dialogs_and_navigation(page, width: int) -> None:
+    page.set_viewport_size({"width": width, "height": 900})
+    page.get_by_role("radio", name="Th\u00e8me sombre").check()
+    pw.expect(page.locator("html")).to_have_css("color-scheme", "dark")
+    capture(page, f"dark-assistant-{width}")
+    page.locator(".topic-button").nth(1).click()
+    pw.expect(page.locator("#question-input")).not_to_have_value("")
+    ask(page)
+    assert_no_page_overflow(page)
+    capture(page, f"dark-answer-{width}")
+    page.locator("#access-button").click()
+    pw.expect(page.locator("#access-dialog")).to_have_css("background-color", "rgb(28, 31, 33)")
+    capture(page, f"dark-access-{width}")
+    page.keyboard.press("Escape")
+    page.locator('.nav-tab[data-view="architecture"]').click()
+    pw.expect(page).to_have_title("AtlasDocAI | Plateforme")
+    assert_no_page_overflow(page)
+    capture(page, f"dark-platform-{width}")
+
+
+def test_storage_unavailable_does_not_break_appearance_or_analysis(page) -> None:
+    page.add_init_script("""Object.defineProperty(window, 'localStorage', {
+        get() { throw new DOMException('Storage disabled', 'SecurityError'); }
+    });""")
+    page.reload()
+    pw.expect(page.locator("#system-label")).to_have_text("Connect\u00e9")
+    page.get_by_role("radio", name="Th\u00e8me sombre").check()
+    pw.expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+    ask(page)
+
+
+def test_invalid_stored_appearance_falls_back_to_system(page) -> None:
+    page.evaluate("localStorage.setItem('atlasdocai_theme', 'invalid')")
+    page.emulate_media(color_scheme="dark")
+    page.reload()
+    pw.expect(page.get_by_role("radio", name="Th\u00e8me automatique")).to_be_checked()
+    pw.expect(page.locator("html")).to_have_attribute("data-theme", "dark")
+
+
+def test_theme_fallback_without_javascript(browser, server_url) -> None:
+    context = browser.new_context(java_script_enabled=False, color_scheme="dark")
+    try:
+        page = context.new_page()
+        page.goto(server_url)
+        pw.expect(page.locator("html")).to_have_css("color-scheme", "dark")
+        pw.expect(page.locator("noscript")).to_be_visible()
+    finally:
+        context.close()
+
+
+@pytest.mark.parametrize("viewport", [(320, 640), (844, 390), (768, 1024)])
+def test_navigation_and_appearance_remain_reachable(page, viewport) -> None:
+    width, height = viewport
+    page.set_viewport_size({"width": width, "height": height})
+    for name in ["Th\u00e8me clair", "Th\u00e8me sombre", "Th\u00e8me automatique"]:
+        page.get_by_role("radio", name=name).check()
+    page.locator('.nav-tab[data-view="architecture"]').click()
+    page.locator('.nav-tab[data-view="cockpit"]').click()
+    page.locator("#new-question").click()
+    pw.expect(page.locator("#question-input")).to_be_focused()
+    assert_no_page_overflow(page)
+    page.locator("#access-button").click()
+    pw.expect(page.locator("#token-input")).to_be_visible()
+    page.keyboard.press("Escape")
+    assert_no_page_overflow(page)
+    assert page.evaluate("getComputedStyle(document.documentElement).scrollBehavior") == "auto"

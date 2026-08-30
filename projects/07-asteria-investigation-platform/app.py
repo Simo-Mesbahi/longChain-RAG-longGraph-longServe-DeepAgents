@@ -1,4 +1,4 @@
-"""Command-line entry point for the Asteria capstone platform."""
+"""Command-line entry point for the AtlasDocAI capstone platform."""
 
 from __future__ import annotations
 
@@ -22,9 +22,7 @@ CORPUS_DIR = ROOT / "projects" / "02-documentary-rag-assistant" / "data"
 
 
 def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        description="Asteria Investigation OS - capstone LangChain et Deep Agents"
-    )
+    parser = argparse.ArgumentParser(description="AtlasDocAI - capstone LangChain et Deep Agents")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     ask = subparsers.add_parser("ask", help="Executer une investigation documentaire")
