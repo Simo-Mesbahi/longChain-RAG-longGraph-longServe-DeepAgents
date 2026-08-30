@@ -43,6 +43,9 @@ api = [
 docs = [
   "mkdocs-material>=9.6,<10.0",
 ]
+ui = [
+  "playwright>=1.50,<2.0",
+]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/ai_course"]
@@ -50,6 +53,7 @@ packages = ["src/ai_course"]
 [tool.pytest.ini_options]
 addopts = "-q --cov=ai_course --cov-report=term-missing"
 testpaths = ["tests"]
+markers = ["ui: browser tests enabled with ASTERIA_UI_TESTS=1"]
 
 [tool.ruff]
 line-length = 100

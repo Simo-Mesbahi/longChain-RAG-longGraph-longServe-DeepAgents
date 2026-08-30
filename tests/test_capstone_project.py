@@ -1,6 +1,7 @@
 import importlib.util
 import json
 import re
+import xml.etree.ElementTree as ET
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -14,9 +15,10 @@ class IdCollector(HTMLParser):
     def __init__(self) -> None:
         super().__init__()
         self.ids: list[str] = []
+        self.elements: list[tuple[str, dict[str, str | None]]] = []
 
     def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        del tag
+        self.elements.append((tag, dict(attrs)))
         for name, value in attrs:
             if name == "id" and value:
                 self.ids.append(value)
@@ -52,6 +54,46 @@ def test_frontend_renders_untrusted_content_as_text() -> None:
     assert ".innerHTML" not in javascript
     assert "/api/v1/investigations" in javascript
     assert "/api/v1/evaluations" in javascript
+
+
+def test_frontend_dom_references_and_icon_symbols_resolve() -> None:
+    html = (FRONTEND_DIR / "index.html").read_text(encoding="utf-8")
+    javascript = (FRONTEND_DIR / "assets/app.js").read_text(encoding="utf-8")
+    collector = IdCollector()
+    collector.feed(html)
+    references = set(re.findall(r'\$\("#([a-z][a-z0-9-]*)"\)', javascript))
+    assert references <= set(collector.ids)
+    sprite = ET.parse(FRONTEND_DIR / "assets/icons.svg").getroot()
+    symbols = {node.attrib["id"] for node in sprite}
+    uses = {attrs["href"].split("#")[1] for tag, attrs in collector.elements if tag == "use"}
+    assert uses <= symbols
+
+
+def test_frontend_tabs_have_accessible_panels_and_roving_focus() -> None:
+    collector = IdCollector()
+    collector.feed((FRONTEND_DIR / "index.html").read_text(encoding="utf-8"))
+    by_id = {attrs["id"]: attrs for _, attrs in collector.elements if "id" in attrs}
+    tabs = [attrs for _, attrs in collector.elements if attrs.get("role") == "tab"]
+    assert len(tabs) == 4
+    assert sum(tab["aria-selected"] == "true" for tab in tabs) == 1
+    for tab in tabs:
+        panel = by_id[tab["aria-controls"]]
+        assert panel["role"] == "tabpanel"
+        assert panel["aria-labelledby"] == tab["id"]
+        if tab["aria-selected"] == "false":
+            assert tab["tabindex"] == "-1"
+            assert "hidden" in panel
+
+
+@pytest.mark.parametrize(
+    "asset", ["styles.css", "app.js", "icons.svg", "favicon.svg", "inter-latin-wght-normal.woff2"]
+)
+def test_frontend_assets_are_served_locally(asset: str) -> None:
+    from fastapi.testclient import TestClient
+
+    response = TestClient(load_api_module().app).get(f"/assets/{asset}")
+    assert response.status_code == 200
+    assert response.content
 
 
 def test_frontend_design_has_responsive_and_motion_safe_states() -> None:

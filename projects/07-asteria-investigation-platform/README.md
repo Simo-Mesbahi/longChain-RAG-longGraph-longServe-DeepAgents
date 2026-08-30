@@ -17,6 +17,53 @@ python projects/07-asteria-investigation-platform/app.py serve --reload
 Ouvrir ensuite `http://127.0.0.1:8000`. La documentation OpenAPI est disponible sur
 `http://127.0.0.1:8000/api/docs`.
 
+## Interface web
+
+L'interface claire privilegie la question, la reponse et les sources. Elle ne necessite ni Node.js,
+ni compilation frontend, ni CDN : HTML, CSS, JavaScript, police et icones sont servis par FastAPI.
+
+| Espace | Fonctions |
+|---|---|
+| Assistant | Question, exemples metier, choix du moteur, reglages avances, sources consultables |
+| Resultat | Passages sources, etapes, journal local, controles, copie et export texte |
+| Questions recentes | Huit dernieres analyses, conservees uniquement en memoire dans la page |
+| Validations | Execution des scenarios de reference et ouverture d'un cas dans l'assistant |
+| Plateforme | Configuration, fonctionnement des moteurs et controles de demonstration |
+| Acces | Jeton Asteria facultatif en local, conserve dans la session navigateur |
+
+L'historique disparait au rechargement. Le jeton Asteria n'est ni une cle OpenAI ni une cle LangSmith.
+La zone de connexion ne doit jamais recevoir ces cles fournisseur.
+
+Les onglets de resultat sont navigables avec les fleches, Home et End. Ctrl+Entree ou Cmd+Entree
+lance l'analyse. Les animations respectent la preference systeme de reduction des mouvements.
+Les requetes concurrentes accidentelles sont bloquees, les erreurs restent visibles et la question
+est conservee pour une nouvelle tentative. Aucun delai artificiel n'est ajoute aux reponses.
+
+**Limite explicite :** le moteur de cette interface reste local et deterministe, sans appel OpenAI.
+Les traces sont locales. Les scores de recherche ne sont pas des probabilites de veracite et un
+score de readiness de demonstration ne certifie pas une mise en production reelle.
+
+La police Inter et les icones Lucide sont distribuees localement. Leurs licences sont conservees
+dans `frontend/assets/inter-LICENSE.txt` et `frontend/assets/lucide-LICENSE.txt`.
+
+### Tests navigateur
+
+Depuis la racine du depot :
+
+```bash
+python -m pip install -e ".[dev,api,ui]"
+python -m playwright install chromium
+ASTERIA_UI_TESTS=1 python -m pytest tests/test_capstone_ui.py --no-cov
+```
+
+La suite demarre et arrete son propre serveur sur un port libre, avec un jeton de test. Elle couvre
+les affichages de 320 a 1440 pixels, les trois moteurs, les sources, l'export, les erreurs reseau,
+l'authentification, le clavier et la protection contre le rendu HTML non fiable. Aucun secret reel
+n'est necessaire. Sans `ASTERIA_UI_TESTS=1`, ces tests sont ignores par la suite Python ordinaire.
+
+Pour conserver les captures, ajouter `ASTERIA_UI_SCREENSHOTS=/tmp/asteria-ui`. La CI lance les tests
+navigateur et conserve les captures pendant sept jours dans l'artefact `asteria-interface`.
+
 ## CLI
 
 ```bash
