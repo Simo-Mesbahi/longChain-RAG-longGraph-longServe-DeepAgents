@@ -58,7 +58,7 @@ jobs:
         run: python -m pytest tests/test_capstone_ui.py --no-cov
       - name: Keep interface screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: atlasdocai-interface-${{ matrix.browser }}
           path: artifacts/ui
