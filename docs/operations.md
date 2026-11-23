@@ -86,3 +86,12 @@ metier n'est pas termine.
 
 `OPENAI_API_KEY`, `LANGSMITH_API_KEY` et `ASTERIA_API_TOKEN` sont configures par l'hebergeur. Toute
 valeur publiee doit etre revoquee et remplacee, meme si le commit est supprime ensuite.
+
+
+## Quotas du cockpit : état borné et accès concurrents
+
+Le limiteur AtlasDocAI conserve au maximum 10 000 identités actives et 60 requêtes par identité sur une fenêtre glissante de 60 secondes. Les vérifications sont atomiques entre threads. Les identités expirées sont libérées et une saturation de capacité rejette une nouvelle identité plutôt que d’effacer le quota d’un client actif. Les réponses 429 fournissent `Retry-After`.
+
+Ce stockage est **local au processus**. Les quotas ne sont pas partagés entre workers ou instances ; un déploiement distribué doit utiliser un mécanisme atomique partagé et définir la politique de confiance du proxy. Le code ne lit pas arbitrairement X-Forwarded-For. Le limiteur n’est pas un substitut à l’authentification ou à une protection en périphérie.
+
+Vérification du 23 novembre 2026 : 129 tests Python réussis, 30 tests navigateur non exécutés dans cette passe ; Ruff et construction MkDocs stricte réussis. Les nouveaux tests couvrent la concurrence de 100 appels pour un quota de 5, l’expiration, la saturation du nombre d’identités et les délais de reprise. Aucun appel LLM payant ni déploiement n’a été effectué.

@@ -1,0 +1,25 @@
+................................ssssssssssssssssssssssssssssss.......... [ 45%]
+........................................................................ [ 90%]
+...............                                                          [100%]
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.12.14-final-0 _______________
+
+Name                                    Stmts   Miss  Cover   Missing
+---------------------------------------------------------------------
+src/ai_course/__init__.py                   1      0   100%
+src/ai_course/capstone_platform.py        191      3    98%   441-442, 583
+src/ai_course/claim_intake.py              62      2    97%   91, 99
+src/ai_course/deep_agents.py              268     19    93%   50, 99, 130, 135-138, 147, 166, 219, 221, 318, 367, 627, 640, 643, 652, 663, 683
+src/ai_course/documentary_rag.py          227     22    90%   93, 95, 133, 135, 153-154, 251, 270, 278, 281-282, 288, 350, 352, 359, 376, 382, 385-386, 393, 406, 503
+src/ai_course/investigation_graph.py      209     13    94%   77, 166, 171, 173, 175, 196, 237, 245, 301, 419, 440-441, 444
+src/ai_course/langchain_basics.py          11      2    82%   36, 47
+src/ai_course/langsmith_evaluation.py     245     25    90%   32, 39, 58, 126, 132, 135-136, 142-144, 150, 190-196, 217, 289, 293, 298, 304, 306, 469, 514, 525
+src/ai_course/production_readiness.py     210     10    95%   44, 74, 76, 127, 468, 541, 748, 769-771
+src/ai_course/rag_basics.py               107     10    91%   24, 44, 91-107, 118, 144, 162, 164, 206, 215
+src/ai_course/rag_evaluation.py           211     20    91%   34, 150, 152, 218-241, 273, 352, 371, 376, 392-395, 400, 406, 409-410, 418, 426, 431
+src/ai_course/rate_limit.py                42      1    98%   59
+src/ai_course/settings.py                  11      0   100%
+src/ai_course/structured_output.py         49      2    96%   53, 86
+---------------------------------------------------------------------
+TOTAL                                    1844    129    93%
+129 passed, 30 skipped in 3.78s

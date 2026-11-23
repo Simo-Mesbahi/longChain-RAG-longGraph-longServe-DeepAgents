@@ -148,3 +148,5 @@ Le contenu suit les documentations officielles de LangChain. L'ecosysteme evolue
 ## Licence
 
 Le code et le contenu pedagogique de ce depot sont distribues sous licence [MIT](LICENSE).
+
+[Preuves des contrôles locaux du 23 novembre 2026](verification/2026-11-23/results.json).

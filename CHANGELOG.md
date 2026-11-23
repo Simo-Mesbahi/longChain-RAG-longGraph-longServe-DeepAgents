@@ -46,3 +46,10 @@ Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le pr
 - Docker Compose, blueprint Render, documentation d'architecture et runbook d'exploitation.
 - Configuration Python, Ruff, Pytest et GitHub Actions.
 - Documentation de contribution, securite et feuille de route.
+
+
+## 2026-11-23 — Quotas bornés
+
+- État du limiteur borné par nombre d’identités et expiration.
+- Vérification protégée par verrou entre threads ; réponse 429 avec délai de reprise.
+- Tests de concurrence, capacité, expiration et configuration.
