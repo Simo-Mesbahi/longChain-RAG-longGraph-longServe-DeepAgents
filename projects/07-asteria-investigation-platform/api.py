@@ -35,6 +35,7 @@ from ai_course.concurrency_limit import RequestConcurrencyLimit  # noqa: E402
 from ai_course.http_limits import RequestBodyLimit  # noqa: E402
 from ai_course.production_readiness import build_health_payload  # noqa: E402
 from ai_course.rate_limit import RateLimitExceeded, SlidingWindowLimiter  # noqa: E402
+from ai_course.strict_json import StrictJSONRoute  # noqa: E402
 
 PROJECT_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = PROJECT_DIR / "frontend"
@@ -66,6 +67,7 @@ app = FastAPI(
     redoc_url="/api/redoc",
     openapi_url="/api/openapi.json",
 )
+app.router.route_class = StrictJSONRoute
 app.add_middleware(GZipMiddleware, minimum_size=800)
 app.add_middleware(RequestBodyLimit)
 app.add_middleware(RequestConcurrencyLimit, max_concurrent=4)

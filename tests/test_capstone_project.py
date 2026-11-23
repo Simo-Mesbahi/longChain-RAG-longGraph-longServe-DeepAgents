@@ -228,3 +228,18 @@ def test_authentication_rejects_malformed_tokens_without_server_errors(monkeypat
     assert error.value.status_code == 401
     assert error.value.headers == {"WWW-Authenticate": "Bearer"}
     assert module.authorize("Bearer expected-token") is None
+
+
+def test_investigation_route_rejects_duplicate_keys_before_model_validation():
+    from fastapi.testclient import TestClient
+
+    module = load_api_module()
+    with TestClient(module.app) as client:
+        response = client.post(
+            "/api/v1/investigations",
+            content='{"query":"first","query":"second"}',
+            headers={"Content-Type": "application/json"},
+        )
+    assert response.status_code == 422
+    assert response.json()["detail"][0]["type"] == "json_invalid"
+    assert response.headers["X-Content-Type-Options"] == "nosniff"
