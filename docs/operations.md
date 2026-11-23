@@ -95,3 +95,22 @@ Le limiteur AtlasDocAI conserve au maximum 10 000 identités actives et 60 requ�
 Ce stockage est **local au processus**. Les quotas ne sont pas partagés entre workers ou instances ; un déploiement distribué doit utiliser un mécanisme atomique partagé et définir la politique de confiance du proxy. Le code ne lit pas arbitrairement X-Forwarded-For. Le limiteur n’est pas un substitut à l’authentification ou à une protection en périphérie.
 
 Vérification du 23 novembre 2026 : 129 tests Python réussis, 30 tests navigateur non exécutés dans cette passe ; Ruff et construction MkDocs stricte réussis. Les nouveaux tests couvrent la concurrence de 100 appels pour un quota de 5, l’expiration, la saturation du nombre d’identités et les délais de reprise. Aucun appel LLM payant ni déploiement n’a été effectué.
+
+## Admission des corps HTTP
+
+L'API AtlasDocAI borne les corps HTTP à **1 Mio** et leur lecture totale à **15 secondes**,
+avant la validation et l'investigation. Une taille déclarée excessive est refusée
+immédiatement ; les octets effectivement reçus sont comptés même si l'en-tête est
+absent ou sous-estimé. Les longueurs invalides ou dupliquées donnent 400, les corps
+trop grands 413 et les lectures expirées 408.
+
+Le délai couvre la réception entière et ne repart pas à chaque fragment. Il ne couvre
+pas le temps de calcul de l'investigation. Un client déconnecté ne déclenche pas le
+traitement. Les erreurs d'admission conservent les en-têtes de sécurité de l'API.
+
+Les tests utilisent des messages ASGI et l'API locale : corps à la borne exacte,
+flux lents, fausse longueur, déconnexion et contrôle avant validation. Les réponses
+413 lentes restent distinctes du délai de lecture afin d'éviter une seconde réponse.
+Le quota de requêtes existant conserve son état par processus ; un déploiement à
+plusieurs workers doit toujours disposer d'un compteur partagé s'il exige un quota
+global. Aucun appel LLM payant n'est nécessaire pour ces vérifications.

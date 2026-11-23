@@ -1,0 +1,23 @@
+{
+  "checks": [
+    {
+      "command": "ruff check .",
+      "exit_code": 0,
+      "duration_seconds": 0.016,
+      "log": "check-1.log"
+    },
+    {
+      "command": "ruff format --check .",
+      "exit_code": 0,
+      "duration_seconds": 0.034,
+      "log": "check-2.log"
+    },
+    {
+      "command": "python -m pytest --no-cov",
+      "exit_code": 0,
+      "duration_seconds": 4.038,
+      "log": "check-3.log"
+    }
+  ],
+  "passed": true
+}
