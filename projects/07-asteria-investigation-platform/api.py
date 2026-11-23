@@ -5,10 +5,8 @@ from __future__ import annotations
 import os
 import secrets
 import sys
-from collections import defaultdict, deque
 from collections.abc import Callable
 from pathlib import Path
-from time import monotonic
 from typing import Annotated, Any
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -34,6 +32,7 @@ from ai_course.capstone_platform import (  # noqa: E402
     run_capstone_request,
 )
 from ai_course.production_readiness import build_health_payload  # noqa: E402
+from ai_course.rate_limit import RateLimitExceeded, SlidingWindowLimiter  # noqa: E402
 
 PROJECT_DIR = Path(__file__).resolve().parent
 FRONTEND_DIR = PROJECT_DIR / "frontend"
@@ -42,25 +41,18 @@ STORE = build_capstone_store(CORPUS_DIR)
 READINESS = build_capstone_readiness()
 
 
-class InMemoryRateLimiter:
-    """Small single-process limiter for the educational deployment."""
-
-    def __init__(self, requests: int = 60, window_seconds: int = 60) -> None:
-        self.requests = requests
-        self.window_seconds = window_seconds
-        self._events: dict[str, deque[float]] = defaultdict(deque)
+class InMemoryRateLimiter(SlidingWindowLimiter):
+    """Single-process quota with bounded identities and atomic thread-safe checks."""
 
     def check(self, key: str) -> None:
-        now = monotonic()
-        events = self._events[key]
-        while events and events[0] <= now - self.window_seconds:
-            events.popleft()
-        if len(events) >= self.requests:
+        try:
+            super().check(key)
+        except RateLimitExceeded as error:
             raise HTTPException(
                 status_code=status.HTTP_429_TOO_MANY_REQUESTS,
-                detail="Rate limit exceeded. Retry in one minute.",
-            )
-        events.append(now)
+                detail="Rate limit exceeded. Retry later.",
+                headers={"Retry-After": str(error.retry_after)},
+            ) from None
 
 
 limiter = InMemoryRateLimiter()
