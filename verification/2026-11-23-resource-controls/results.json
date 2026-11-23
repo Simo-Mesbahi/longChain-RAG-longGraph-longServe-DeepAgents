@@ -1,0 +1,28 @@
+{
+  "date_utc": "2026-11-23T16:14:36.092771+00:00",
+  "base_commit": "c9081cdd83cbfe0f25ed7c47bd1e32f8ce44fdf2",
+  "execution": "local; external integrations not exercised",
+  "checks": [
+    {
+      "command": "ruff check .",
+      "exit_code": 0,
+      "log": "check-1.log"
+    },
+    {
+      "command": "ruff format --check .",
+      "exit_code": 0,
+      "log": "check-2.log"
+    },
+    {
+      "command": "python -m pytest --no-cov",
+      "exit_code": 0,
+      "log": "check-3.log"
+    },
+    {
+      "command": "python -m mkdocs build --strict",
+      "exit_code": 0,
+      "log": "check-4.log"
+    }
+  ],
+  "passed": true
+}

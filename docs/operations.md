@@ -114,3 +114,21 @@ flux lents, fausse longueur, déconnexion et contrôle avant validation. Les ré
 Le quota de requêtes existant conserve son état par processus ; un déploiement à
 plusieurs workers doit toujours disposer d'un compteur partagé s'il exige un quota
 global. Aucun appel LLM payant n'est nécessaire pour ces vérifications.
+
+## Admission des requêtes coûteuses
+
+Le capstone limite à **4 requêtes d’écriture simultanées par worker** avant la lecture
+du corps. Les investigations et évaluations en excès reçoivent 503 avec `Retry-After: 1` ;
+elles ne sont pas mises en attente ni exécutées. Les lectures et contrôles de santé
+restent accessibles. Les capacités sont libérées sur réponse, exception et annulation.
+Cette limite s’ajoute au débit par identité et aux limites de taille et de lecture ;
+elle ne remplace pas une coordination entre plusieurs workers. La capacité est réglable
+avec `max_concurrent` lors de l’enregistrement du middleware.
+
+La vérification du jeton compare des octets UTF-8 : un en-tête malformé contenant des
+caractères non ASCII reçoit 401, sans provoquer une erreur interne. Le jeton n’est
+pas journalisé. Les tests utilisent une valeur de démonstration, sans identifiant réel.
+
+**156 tests locaux passent ; 30 cas de navigateur sont réservés à la CI.** Ruff, le
+formatage et la documentation stricte passent. Preuves :
+`verification/2026-11-23-resource-controls/`.
