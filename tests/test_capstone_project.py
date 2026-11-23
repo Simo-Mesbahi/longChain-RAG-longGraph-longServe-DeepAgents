@@ -191,6 +191,17 @@ def test_api_runs_investigation_and_enforces_configured_token(monkeypatch) -> No
     assert authorized.status_code == 200
 
 
+def test_api_rejects_oversized_bodies_before_validation_or_investigation() -> None:
+    from fastapi.testclient import TestClient
+
+    module = load_api_module()
+    response = TestClient(module.app).post(
+        "/api/v1/investigations", headers={"Content-Length": str(1024 * 1024 + 1)}
+    )
+    assert response.status_code == 413
+    assert response.headers["X-Content-Type-Options"] == "nosniff"
+
+
 def test_api_business_evaluation_is_a_green_release_gate() -> None:
     from fastapi.testclient import TestClient
 

@@ -31,6 +31,7 @@ from ai_course.capstone_platform import (  # noqa: E402
     run_acceptance_suite,
     run_capstone_request,
 )
+from ai_course.http_limits import RequestBodyLimit  # noqa: E402
 from ai_course.production_readiness import build_health_payload  # noqa: E402
 from ai_course.rate_limit import RateLimitExceeded, SlidingWindowLimiter  # noqa: E402
 
@@ -65,6 +66,7 @@ app = FastAPI(
     openapi_url="/api/openapi.json",
 )
 app.add_middleware(GZipMiddleware, minimum_size=800)
+app.add_middleware(RequestBodyLimit)
 app.mount("/assets", StaticFiles(directory=FRONTEND_DIR / "assets"), name="assets")
 
 
