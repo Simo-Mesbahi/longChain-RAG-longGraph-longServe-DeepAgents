@@ -132,3 +132,7 @@ pas journalisé. Les tests utilisent une valeur de démonstration, sans identifi
 **156 tests locaux passent ; 30 cas de navigateur sont réservés à la CI.** Ruff, le
 formatage et la documentation stricte passent. Preuves :
 `verification/2026-11-23-resource-controls/`.
+
+## Data integrity continuation — 2026-11-23
+
+API JSON bodies are decoded once and cached. UTF-8 including BOM is supported. Duplicate keys, non-finite numbers, overflow, invalid encoding and nesting beyond 64 containers are rejected with 422 before endpoint execution. A linear depth scan ignores braces inside quoted strings. Security headers and error redaction remain covered. Local suite: 171 tests passed, 30 browser cases skipped; browser coverage runs separately in GitHub Actions. Ruff and strict MkDocs checks passed. No paid model call or external integration was exercised.
