@@ -31,6 +31,7 @@ from ai_course.capstone_platform import (  # noqa: E402
     run_acceptance_suite,
     run_capstone_request,
 )
+from ai_course.concurrency_limit import RequestConcurrencyLimit  # noqa: E402
 from ai_course.http_limits import RequestBodyLimit  # noqa: E402
 from ai_course.production_readiness import build_health_payload  # noqa: E402
 from ai_course.rate_limit import RateLimitExceeded, SlidingWindowLimiter  # noqa: E402
@@ -67,6 +68,7 @@ app = FastAPI(
 )
 app.add_middleware(GZipMiddleware, minimum_size=800)
 app.add_middleware(RequestBodyLimit)
+app.add_middleware(RequestConcurrencyLimit, max_concurrent=4)
 app.mount("/assets", StaticFiles(directory=FRONTEND_DIR / "assets"), name="assets")
 
 
@@ -91,7 +93,9 @@ def authorize(
     if not expected:
         return
     scheme, _, provided = (authorization or "").partition(" ")
-    if scheme.casefold() != "bearer" or not secrets.compare_digest(provided, expected):
+    if scheme.casefold() != "bearer" or not secrets.compare_digest(
+        provided.encode("utf-8"), expected.encode("utf-8")
+    ):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Missing or invalid bearer token.",

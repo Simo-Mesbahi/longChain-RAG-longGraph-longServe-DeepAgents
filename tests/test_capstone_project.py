@@ -213,3 +213,18 @@ def test_api_business_evaluation_is_a_green_release_gate() -> None:
     assert response.status_code == 200
     assert response.json()["release_gate_passed"] is True
     assert response.json()["pass_rate"] == 1.0
+
+
+@pytest.mark.parametrize(
+    "provided", [None, "Basic expected-token", "Bearer incorrect", "Bearer non-ascii-é"]
+)
+def test_authentication_rejects_malformed_tokens_without_server_errors(monkeypatch, provided):
+    from fastapi import HTTPException
+
+    module = load_api_module()
+    monkeypatch.setenv("ASTERIA_API_TOKEN", "expected-token")
+    with pytest.raises(HTTPException) as error:
+        module.authorize(provided)
+    assert error.value.status_code == 401
+    assert error.value.headers == {"WWW-Authenticate": "Bearer"}
+    assert module.authorize("Bearer expected-token") is None
